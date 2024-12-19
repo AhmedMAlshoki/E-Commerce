@@ -1,5 +1,7 @@
 package com.example.ECommerce.Entities;
 
+import com.example.ECommerce.Enums.Country;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,4 +16,13 @@ public class Address {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    private String addressLine1;
+    private String addressLine2;
+    private String city;
+    private String state;
+    @Enumerated(EnumType.STRING)
+    @Column(unique = true)
+    private Country country;
+    @Nullable
+    private String zipCode;
 }

@@ -1,0 +1,50 @@
+package com.example.ECommerce.Enums;
+
+public enum Country {
+    // Example countries with their ISO codes
+    UNITED_STATES("US"),
+    CANADA("CA"),
+    UNITED_KINGDOM("GB"),
+    AUSTRALIA("AU"),
+    INDIA("IN"),
+    CHINA("CN"),
+    BRAZIL("BR"),
+    SOUTH_AFRICA("ZA"),
+    GERMANY("DE"),
+    FRANCE("FR"),
+    JAPAN("JP"),
+    RUSSIA("RU"),
+    ITALY("IT"),
+    MEXICO("MX"),
+    NIGERIA("NG"),
+    SOUTH_KOREA("KR"),
+    SAUDI_ARABIA("SA"),
+    ARGENTINA("AR"),
+    INDONESIA("ID"),
+    TURKEY("TR"),
+    EGYPT("EG");
+
+    private final String isoCode;
+
+    Country(String isoCode) {
+        this.isoCode = isoCode;
+    }
+
+    public String getIsoCode() {
+        return isoCode;
+    }
+
+    public static Country fromIsoCode(String isoCode) {
+        for (Country country : values()) {
+            if (country.getIsoCode().equalsIgnoreCase(isoCode)) {
+                return country;
+            }
+        }
+        throw new IllegalArgumentException("No country found with ISO code: " + isoCode);
+    }
+
+    @Override
+    public String toString() {
+        return name() + " (" + isoCode + ")";
+    }
+}

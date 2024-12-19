@@ -24,16 +24,6 @@ public class Customer extends User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> purchasedProducts = new HashSet<>();
-    @ManyToMany
-    /*EntityGraph
-    @EntityGraph(attributePaths = {"purchasedProducts"})
-     */
-    @JoinTable(
-            name = "customer_wishlist_products",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<Product> wishListedProducts = new HashSet<>();
     @ElementCollection
     private List<String> orderIds = new ArrayList<>();
 }
