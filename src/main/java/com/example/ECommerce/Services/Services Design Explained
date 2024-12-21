@@ -1,4 +1,0 @@
-All roles take privileges from guest role since it will has the most basic one and all about display
-and navigation
-So (customer, seller, support) will take those privileges and their functions will be also
-And the Admin will take the privileges from support and add more functions

@@ -1,5 +1,6 @@
 package com.example.ECommerce.Entities;
 
+import com.example.ECommerce.Documents.Order;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,9 @@ public class Payment {
     @Column(name = "payment_date", nullable = false, updatable = false)
     private Date paymentDate;
     @ManyToOne
+    private Order order;
+    @ManyToOne
     @JoinColumn(name = "card_holder_id")
-    private User cardHolderName;
+    private User cardHolderUser;
     private int amount;
 }

@@ -1,5 +1,6 @@
 package com.example.ECommerce.Entities;
 
+import com.example.ECommerce.Documents.Review;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,4 +36,10 @@ public class User {
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
+
+    @OneToMany
+    private Set<Cart> carts = new HashSet<>();
+
+    @OneToMany
+    private Set<Review> reviews = new HashSet<>();
 }

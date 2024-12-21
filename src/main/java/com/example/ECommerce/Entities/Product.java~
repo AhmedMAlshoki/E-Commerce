@@ -23,7 +23,6 @@ public class Product {
     private String description;
     private double price;
     private int quantity;
-    private double rating;
     @OneToOne
     private Category category;
     @ManyToOne
