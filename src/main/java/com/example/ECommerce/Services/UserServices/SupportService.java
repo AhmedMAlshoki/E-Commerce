@@ -3,5 +3,5 @@ package com.example.ECommerce.Services.UserServices;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SupportService extends SellerService {
+public class SupportService extends GuestServices {
 }

@@ -2,8 +2,7 @@ package com.example.ECommerce.Entities;
 
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,6 +11,9 @@ import java.util.Date;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "product")
 public class Product {
@@ -24,7 +26,8 @@ public class Product {
     private double price;
     private int quantity;
     private double rating;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
     @ManyToOne
     @CreatedBy

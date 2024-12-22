@@ -2,14 +2,16 @@ package com.example.ECommerce.Entities;
 
 import com.example.ECommerce.Documents.Order;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "payment")
 public class Payment {

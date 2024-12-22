@@ -11,18 +11,19 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
 @Entity
 @Table(name = "sellers")
-public class Seller extends User {
+public class Seller extends Customer {
     private String businessName;
     private String taxId;
     @OneToOne
     private Address shippingAddress;
     @OneToMany
-    private List<Product> ownedProducts;
+    private List<Product> ownedProducts = new ArrayList<>();
     @OneToMany
     private List<Offer> offers; // List of offers made by the seller <Offer>
 }

@@ -18,6 +18,7 @@ public class Order {
     private Address shippingAddress;
     private Address sourceAddress;
     private Payment payment;
+    int quantity;
     @CreatedDate
     private Date orderDate;
 }

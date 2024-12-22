@@ -10,5 +10,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "admins")
-public class Admin extends User {
+public class Admin extends Support {
+
 }

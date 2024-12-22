@@ -1,7 +1,7 @@
 package com.example.ECommerce.Entities.SubEntities;
 
-import com.example.ECommerce.Entities.Product;
-import com.example.ECommerce.Entities.User;
+import com.example.ECommerce.Documents.Review;
+import com.example.ECommerce.Entities.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,11 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "customers")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Customer extends User {
+    @OneToOne
+    private Address personalAddress;
+    private Double balance;
     @ManyToMany
     //EntityGraph
     @JoinTable(
@@ -36,4 +40,13 @@ public class Customer extends User {
     private Set<Product> wishListedProducts = new HashSet<>();
     @ElementCollection
     private List<String> orderIds = new ArrayList<>();
+
+    @OneToMany
+    private Set<Cart> carts = new HashSet<>();
+
+    @OneToMany
+    private Set<Review> reviews = new HashSet<>();
+
+    @OneToMany
+    List<Report> reports = new ArrayList<>();
 }

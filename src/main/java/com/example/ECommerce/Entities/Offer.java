@@ -2,12 +2,14 @@ package com.example.ECommerce.Entities;
 
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "offer")
 public class Offer {

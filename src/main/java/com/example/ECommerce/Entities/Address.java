@@ -3,9 +3,11 @@ package com.example.ECommerce.Entities;
 import com.example.ECommerce.Enums.Country;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
