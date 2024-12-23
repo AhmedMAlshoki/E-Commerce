@@ -17,9 +17,16 @@ import java.util.Set;
 @Table(name = "customers")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Customer extends User {
+    /**
+     *@EntityGraph(attributePaths = "personalAddress")
+     */
+
     @OneToOne
     private Address personalAddress;
     private Double balance;
+    private Double amountSpent;
+    private Double amountSaved;
+    private Integer LoyaltyPoints;
     @ManyToMany
     //EntityGraph
     @JoinTable(

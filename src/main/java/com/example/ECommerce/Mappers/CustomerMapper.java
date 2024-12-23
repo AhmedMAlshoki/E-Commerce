@@ -10,7 +10,12 @@ import com.example.ECommerce.DTOs.UserDTO;
 public interface CustomerMapper {
 
     // Map Customer entity to CustomerDTO
-    CustomerDTO CustomertoCustomerDTO(Customer customer );
+
+    CustomerDTO CustomertoCustomerDTO(Customer customer);
+
+    /*
+    * CustomerProfileMapper <-> CustomerProfileDTO
+    * */
 
     // Map CustomerDTO back to Customer entity
     Customer CustomerDTOtoCustomer(CustomerDTO customerDTO);

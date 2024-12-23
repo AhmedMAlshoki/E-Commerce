@@ -29,6 +29,7 @@ public class User {
     private String email;
     private String password;
     private String phoneNumber;
+
     @Enumerated(EnumType.STRING)
     private Roles role;
     @CreatedDate

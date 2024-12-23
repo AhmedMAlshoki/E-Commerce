@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 public record CustomerProfileDTO(String name, String email, Date createdAt, String phoneNumber,
+                                 Double amountSpent, Double amountSaved, Integer LoyaltyPoints,
                                  Roles role, Double balance, AddressDTO personalAddress,
                                  Set<Product> wishListedProducts,
                                  Set<Product> purchasedProducts , Set<Review> reviews ,
