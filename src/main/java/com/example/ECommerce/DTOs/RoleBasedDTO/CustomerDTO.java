@@ -2,6 +2,10 @@ package com.example.ECommerce.DTOs.RoleBasedDTO;
 
 import com.example.ECommerce.DTOs.AddressDTO;
 import com.example.ECommerce.DTOs.UserDTO;
+import com.example.ECommerce.Enums.Roles;
 
-public record CustomerDTO(UserDTO user, Double balance, AddressDTO personalAddress) {
+import java.util.Date;
+
+public record CustomerDTO(String name, String email, Date createdAt, String phoneNumber,
+                          Double balance, AddressDTO personalAddress) {
 }

@@ -7,7 +7,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.util.Date;
+import java.util.*;
 
 @Getter
 @Setter
@@ -36,7 +36,10 @@ public class Product {
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
-
+    @ElementCollection
+    List<String> reviewIds = new ArrayList<>();
+    @OneToOne
+    private Offer offer;
     @LastModifiedDate
     @Column(name = "updated_at")
     private Date updatedAt;

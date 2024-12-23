@@ -44,8 +44,8 @@ public class Customer extends User {
     @OneToMany
     private Set<Cart> carts = new HashSet<>();
 
-    @OneToMany
-    private Set<Review> reviews = new HashSet<>();
+    @ElementCollection
+    List<String> reviewIds = new ArrayList<>();
 
     @OneToMany
     List<Report> reports = new ArrayList<>();

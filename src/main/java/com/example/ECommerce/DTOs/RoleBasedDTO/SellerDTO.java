@@ -1,4 +1,11 @@
 package com.example.ECommerce.DTOs.RoleBasedDTO;
 
-public record SellerDTO() {
+import com.example.ECommerce.DTOs.AddressDTO;
+import com.example.ECommerce.DTOs.UserDTO;
+
+import java.util.Date;
+
+public record SellerDTO(String name, String email, Date createdAt,String phoneNumber,
+                        Double balance, AddressDTO personalAddress,
+                        String businessName, AddressDTO shippingAddress) {
 }
