@@ -1,0 +1,3 @@
+docker pull postgres:latest
+docker run --name postgres-container -e POSTGRES_USER=alshoki -e POSTGRES_PASSWORD=password -e POSTGRES_DB=ecommerce -p 5432:5432 -d postgres:latest
+docker exec -it postgres-container psql -U alshoki -d ecommerce

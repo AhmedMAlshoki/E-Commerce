@@ -1,6 +1,6 @@
 package com.example.ECommerce.Entities;
 
-import com.example.ECommerce.Enums.Roles;
+import com.example.ECommerce.Enums.Categories;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +18,6 @@ public class Category {
     private Long id;
     @Enumerated(EnumType.STRING)
     @Column(unique = true)
-    private Category name;
+    private Categories name ;
 
 }

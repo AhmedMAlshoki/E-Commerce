@@ -20,13 +20,12 @@ public class Payment {
     @Column(name = "id", nullable = false)
     private Long id;
     private String cardNumber;
-    private String expiryDate;
+    private Date expireDate;
     private String cvv;
     @CreatedDate
     @Column(name = "payment_date", nullable = false, updatable = false)
     private Date paymentDate;
-    @ManyToOne
-    private Order order;
+    private Long order;
     @ManyToOne
     @JoinColumn(name = "card_holder_id")
     private User cardHolderUser;
