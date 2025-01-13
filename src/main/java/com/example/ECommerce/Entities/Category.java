@@ -4,6 +4,10 @@ import com.example.ECommerce.Enums.Categories;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -19,5 +23,7 @@ public class Category {
     @Enumerated(EnumType.STRING)
     @Column(unique = true)
     private Categories name ;
+    @OneToMany
+    private LinkedList<Product> products = new LinkedList<>();
 
 }

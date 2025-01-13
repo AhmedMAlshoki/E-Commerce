@@ -49,11 +49,13 @@ public class Customer extends User {
     private List<String> orderIds = new ArrayList<>();
 
     @OneToMany
+    @ElementCollection
     private Set<Cart> carts = new HashSet<>();
 
     @ElementCollection
     List<String> reviewIds = new ArrayList<>();
 
     @OneToMany
+    @ElementCollection
     List<Report> reports = new ArrayList<>();
 }

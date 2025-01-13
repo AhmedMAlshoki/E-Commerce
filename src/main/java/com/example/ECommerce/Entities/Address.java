@@ -23,7 +23,6 @@ public class Address {
     private String city;
     private String state;
     @Enumerated(EnumType.STRING)
-    @Column(unique = true)
     private Country country;
     @Nullable
     private String zipCode;

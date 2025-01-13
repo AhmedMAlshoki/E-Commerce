@@ -3,6 +3,7 @@ package com.example.ECommerce.Entities;
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 
 @Getter
@@ -21,7 +22,8 @@ public class Offer {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Seller seller;
-    private int discount;
+    @ColumnDefault("0")
+    private double discount;
     private String startDate;
     private String endDate;
     @ManyToOne

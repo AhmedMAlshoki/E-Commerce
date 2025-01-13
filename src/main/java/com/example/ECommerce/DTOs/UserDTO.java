@@ -7,4 +7,4 @@ import java.util.Date;
 
 //Basic Frequently Used information
 public record UserDTO(String name, String email, Date createdAt,
-                      Roles role) {}
+                      Roles role , String phoneNumber) {}

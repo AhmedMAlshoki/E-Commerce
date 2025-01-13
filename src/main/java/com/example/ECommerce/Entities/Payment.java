@@ -29,5 +29,5 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "card_holder_id")
     private User cardHolderUser;
-    private int amount;
+    private Integer amount;
 }

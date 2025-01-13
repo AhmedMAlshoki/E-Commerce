@@ -4,10 +4,7 @@ import com.example.ECommerce.Entities.Address;
 import com.example.ECommerce.Entities.Offer;
 import com.example.ECommerce.Entities.Product;
 import com.example.ECommerce.Entities.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +20,9 @@ public class Seller extends Customer {
     @OneToOne
     private Address shippingAddress;
     @OneToMany
+    @ElementCollection
     private List<Product> ownedProducts = new ArrayList<>();
     @OneToMany
+    @ElementCollection
     private List<Offer> offers; // List of offers made by the seller <Offer>
 }
