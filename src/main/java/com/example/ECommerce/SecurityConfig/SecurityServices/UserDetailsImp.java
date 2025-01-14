@@ -1,5 +1,6 @@
-package com.example.ECommerce.SecurityConfig;
+package com.example.ECommerce.SecurityConfig.SecurityServices;
 
+import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -10,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class UserDetailsImp implements UserDetails {
     @Serial
@@ -20,20 +20,31 @@ public class UserDetailsImp implements UserDetails {
     private String username;
     @Getter
     private String email;
-    private Roles role;
+    private Collection<? extends GrantedAuthority> role;
     @JsonIgnore
     private String password;
 
-    public UserDetailsImp(String username, String password, Roles role) {
+    public UserDetailsImp(String username,String email, String password, Roles role) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.role = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Convert the role into a GrantedAuthority with a ROLE_ prefix
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        return role;
     }
+
+    public static UserDetailsImp build(User user) {
+
+
+        return new UserDetailsImp (
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getRole());
+    }
+
 
     @Override
     public String getPassword() {

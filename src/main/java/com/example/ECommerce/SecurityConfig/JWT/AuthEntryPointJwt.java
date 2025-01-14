@@ -1,4 +1,4 @@
-package com.example.ECommerce.SecurityConfig;
+package com.example.ECommerce.SecurityConfig.JWT;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
