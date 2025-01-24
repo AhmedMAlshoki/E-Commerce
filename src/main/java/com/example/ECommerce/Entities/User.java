@@ -2,6 +2,7 @@ package com.example.ECommerce.Entities;
 
 import com.example.ECommerce.Documents.Review;
 import com.example.ECommerce.Enums.Roles;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -29,6 +30,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    @Nullable
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)

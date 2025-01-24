@@ -22,7 +22,7 @@ public class UserDetailsImp implements UserDetails {
     private String email;
     private Collection<? extends GrantedAuthority> role;
     @JsonIgnore
-    private String password;
+    private String password; //Should use PasswordEncoder here or At UserDetailImp
 
     public UserDetailsImp(String username,String email, String password, Roles role) {
         this.username = username;

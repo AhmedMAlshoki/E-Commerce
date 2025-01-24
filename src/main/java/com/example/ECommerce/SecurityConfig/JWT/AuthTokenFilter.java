@@ -33,20 +33,25 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         try {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+                //So at every request it resets the authentication object with the user with jwt token
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
+                //JWT provider
                 UserDetailsImp userDetails = (UserDetailsImp) userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
                         userDetails.getAuthorities());
+                //Set the authentication object  , the start of dealing with Authorization
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication); //the actual reset of the authentication without passing through
+                                                                                       //authentication manager
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
         }
 
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response); //redo UserNamePasswordAuthentication but at this time the JWTFilter is the one who pass
+                                                 //the username and password , not the user himself , but jwt was null it means that the login is not done y
     }
 
     private String parseJwt(HttpServletRequest request) {

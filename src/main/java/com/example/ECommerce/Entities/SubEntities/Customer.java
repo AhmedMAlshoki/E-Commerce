@@ -2,9 +2,12 @@ package com.example.ECommerce.Entities.SubEntities;
 
 import com.example.ECommerce.Documents.Review;
 import com.example.ECommerce.Entities.*;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,12 +24,13 @@ public class Customer extends User {
      *@EntityGraph(attributePaths = "personalAddress")
      */
 
+    @Nullable
     @OneToOne
     private Address personalAddress;
-    private Double balance;
-    private Double amountSpent;
-    private Double amountSaved;
-    private Integer LoyaltyPoints;
+    private Double balance = 0.0;
+    private Double amountSpent = 0.0;
+    private Double amountSaved = 0.0;
+    private Integer LoyaltyPoints = 0;
     @ManyToMany
     //EntityGraph
     @JoinTable(
@@ -46,16 +50,19 @@ public class Customer extends User {
     )
     private Set<Product> wishListedProducts = new HashSet<>();
     @ElementCollection
+    @Nullable
     private List<String> orderIds = new ArrayList<>();
 
     @OneToMany
-    @ElementCollection
     private Set<Cart> carts = new HashSet<>();
 
+    Boolean isSeller = false;
+
     @ElementCollection
+    @Nullable
     List<String> reviewIds = new ArrayList<>();
 
+
     @OneToMany
-    @ElementCollection
     List<Report> reports = new ArrayList<>();
 }

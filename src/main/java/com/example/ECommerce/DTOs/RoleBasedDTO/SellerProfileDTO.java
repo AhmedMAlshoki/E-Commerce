@@ -19,5 +19,5 @@ public record SellerProfileDTO(String name, String email, Date createdAt, String
                                Set<Order> orders , List<Report> reports,
                                List<Product> ownedProducts,
                                String businessName, AddressDTO shippingAddress
-                               , List<Offer> offers) {
+                               , List<Offer> offers) implements UserProfileDTO{
 }

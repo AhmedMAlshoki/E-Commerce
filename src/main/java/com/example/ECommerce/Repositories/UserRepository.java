@@ -1,5 +1,6 @@
 package com.example.ECommerce.Repositories;
 
+import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,7 @@ public interface UserRepository<C extends User> extends JpaRepository<User, Long
     Boolean existsByEmail(String email);
 
     Optional<User> findByRoles(Roles role);
+
+    //save new user
+    User save(UserRegisterationDTO user);
 }

@@ -1,7 +1,6 @@
 package com.example.ECommerce.DTOs.RoleBasedDTO;
 
 import com.example.ECommerce.DTOs.AddressDTO;
-import com.example.ECommerce.DTOs.UserDTO;
 import com.example.ECommerce.Documents.Order;
 import com.example.ECommerce.Documents.Review;
 import com.example.ECommerce.Entities.Product;
@@ -17,5 +16,5 @@ public record CustomerProfileDTO(String name, String email, Date createdAt, Stri
                                  Roles role, Double balance, AddressDTO personalAddress,
                                  Set<Product> wishListedProducts,
                                  Set<Product> purchasedProducts , Set<Review> reviews ,
-                                 Set<Order> orders , List<Report> reports) {
+                                 Set<Order> orders , List<Report> reports) implements UserProfileDTO {
 }

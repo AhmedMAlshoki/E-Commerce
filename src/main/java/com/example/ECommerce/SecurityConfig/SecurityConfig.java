@@ -10,8 +10,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authorization.AuthorizationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -24,6 +27,7 @@ import org.springframework.security.web.server.authorization.AuthorizationContex
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
     @Autowired
     private UserDetailsServiceImp userDetailsService;
@@ -32,14 +36,13 @@ public class SecurityConfig {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
+
     //Authentication Manager / Authentication Provider
     @Bean
-    public AuthManager authManager() {
-        AuthManager authManager = new AuthManager();
-        authManager.addProvider(authenticationProvider());
-        // Add more providers as needed
-        return authManager;
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -59,10 +62,11 @@ public class SecurityConfig {
     //Roles Hierarchy Configuration
     @Bean
     public RoleHierarchy roleHierarchy() {
+
         return RoleHierarchyImpl.withDefaultRolePrefix()
-                .role("ADMIN").implies("SUPPORT")
-                .role("SUPPORT").implies("SELLER")
-                .role("SELLER").implies("CUSTOMER")
+                .role("ROLE_ADMIN").implies("ROLE_SUPPORT")
+                .role("ROLE_SUPPORT").implies("ROLE_SELLER")
+                .role("ROLE_SELLER").implies("ROLE_CUSTOMER")
                 .build();
     }
 
@@ -74,7 +78,9 @@ public class SecurityConfig {
         return expressionHandler;
     }
 
+    public void x(){
 
+    }
 
     //------------------------------------------------
 
@@ -84,10 +90,11 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                                .anyRequest().authenticated()
+                .authorizeHttpRequests(auth ->{
+                                                                              auth.requestMatchers("/login").permitAll();
+                                                                              auth.anyRequest().authenticated();
+                }
                 );
-        http.authenticationManager(authManager());
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 

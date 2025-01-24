@@ -20,9 +20,7 @@ public class Seller extends Customer {
     @OneToOne
     private Address shippingAddress;
     @OneToMany
-    @ElementCollection
     private List<Product> ownedProducts = new ArrayList<>();
     @OneToMany
-    @ElementCollection
     private List<Offer> offers; // List of offers made by the seller <Offer>
 }

@@ -1,4 +1,4 @@
 package com.example.ECommerce.DTOs.RoleBasedDTO;
 
-public record AdminDTO() implements UserDTO {
+public interface UserProfileDTO {
 }
