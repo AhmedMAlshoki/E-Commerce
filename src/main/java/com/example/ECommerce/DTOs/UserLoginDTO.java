@@ -1,4 +1,6 @@
+
 package com.example.ECommerce.DTOs;
 
-public record UserLoginDTO(String email,String username, String password)  {
+public record UserLoginDTO(String username, String password)  {
 }
+

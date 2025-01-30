@@ -10,7 +10,6 @@ import org.springframework.data.annotation.CreatedBy;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Entity
 @Table(name = "offer")
 public class Offer {

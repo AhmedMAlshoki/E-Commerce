@@ -12,12 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
     private final CustomerService customerService;
     private final SupportService supportService;
     @Autowired
-    public UserService(UserRepository userRepository, UserMapper userMapper, CustomerService customerService , SupportService supportService) {
-        this.userMapper = userMapper;
+    public UserService(UserRepository userRepository, CustomerService customerService , SupportService supportService) {
         this.userRepository = userRepository;
         this.customerService = customerService;
         this.supportService = supportService;
@@ -26,12 +24,6 @@ public class UserService {
 
     public UserDTO registerUser(UserRegisterationDTO userRegisterationDTO) throws Exception {
 
-        /*
-        * User user = userMapper.userRegisterationDTOToUser(userRegisterationDTO);
-            userRepository.save(user);
-            if (userRegisterationDTO.role() == Roles.CUSTOMER) {
-                return customerService.registerCustomer(userRegisterationDTO);
-                * */
         if (userRepository.existsByEmail(userRegisterationDTO.email())) {
             throw new RuntimeException("Email already exists");
         } else if (userRepository.existsByUsername(userRegisterationDTO.username())) {
@@ -39,9 +31,9 @@ public class UserService {
         }
         Roles role = userRegisterationDTO.isBusinessAccount() ? Roles.CUSTOMER : Roles.SUPPORT;
 
-        User user = userMapper.userRegisterationDTOToUser(userRegisterationDTO);
+
+
         UserDTO userDTO = null;
-        userRepository.save(user);
         switch (role) {
             case CUSTOMER:
                 userDTO = customerService.registerCustomer(userRegisterationDTO);

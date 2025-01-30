@@ -36,6 +36,10 @@ public class UserController {
     }
 
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello";
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserRegisterationDTO userRegisterationDTO)  {

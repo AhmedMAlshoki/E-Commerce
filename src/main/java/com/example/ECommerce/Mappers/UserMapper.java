@@ -7,14 +7,10 @@ import com.example.ECommerce.Entities.SubEntities.Support;
 import com.example.ECommerce.Entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
- //   UserDTO userToUserDTO(User user);
- //   User userDTOToUser(UserDTO userDTO);
-    @Mapping(target = "role",ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    User userRegisterationDTOToUser(UserRegisterationDTO userDTO);
 
     @Mapping(target = "role",ignore = true)
     @Mapping(target = "createdAt", ignore = true)
@@ -26,7 +22,7 @@ public interface UserMapper {
     @Mapping(target = "balance", ignore = true)
     @Mapping(target = "amountSpent", ignore = true)
     @Mapping(target = "amountSaved", ignore = true)
-    @Mapping(target = "LoyaltyPoints", ignore = true)
+    @Mapping(target = "loyaltyPoints", ignore = true)
     @Mapping(target = "purchasedProducts", ignore = true)
     @Mapping(target = "wishListedProducts", ignore = true)
     @Mapping(target = "orderIds", ignore = true)

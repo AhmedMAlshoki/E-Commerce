@@ -30,7 +30,7 @@ public class Customer extends User {
     private Double balance = 0.0;
     private Double amountSpent = 0.0;
     private Double amountSaved = 0.0;
-    private Integer LoyaltyPoints = 0;
+    private Integer loyaltyPoints = 0;
     @ManyToMany
     //EntityGraph
     @JoinTable(

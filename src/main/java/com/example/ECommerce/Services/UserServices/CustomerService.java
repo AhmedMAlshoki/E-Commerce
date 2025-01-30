@@ -3,9 +3,11 @@ package com.example.ECommerce.Services.UserServices;
 import com.example.ECommerce.DTOs.RoleBasedDTO.CustomerDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.SubEntities.Customer;
+import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.CustomerMapper;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +17,7 @@ public class CustomerService {
     private final UserMapper userMapper;
     private final CustomerMapper customerMapper;
 
+    @Autowired
     public CustomerService(CustomerRepository customerRepository, UserMapper userMapper, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
         this.userMapper = userMapper;
@@ -23,6 +26,7 @@ public class CustomerService {
 
     public CustomerDTO registerCustomer(UserRegisterationDTO userRegisterationDTO) {
         Customer customer = userMapper.userRegisterationDTOToCustomer(userRegisterationDTO);
+        customer.setRole(Roles.CUSTOMER);
         customerRepository.save(customer);
         CustomerDTO customerDTO = customerMapper.CustomertoCustomerDTO(customer);
         return null;

@@ -4,6 +4,7 @@ import com.example.ECommerce.DTOs.RoleBasedDTO.SupportDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.SubEntities.Support;
 import com.example.ECommerce.Entities.User;
+import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.SupportMapper;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.SupportRepository;
@@ -24,6 +25,7 @@ public class SupportService {
 
     public SupportDTO registerSupport(UserRegisterationDTO userRegisterationDTO) {
         Support support = userMapper.userRegisterationDTOToSupport(userRegisterationDTO);
+        support.setRole(Roles.SUPPORT);
         supportRepository.save(support);
         //support mapper support to supportDTO
         SupportDTO supportDTO = supportMapper.supportToSupportDTO(support);
