@@ -1,13 +1,11 @@
 package com.example.ECommerce.Mappers;
 
-import com.example.ECommerce.DTOs.UserLoginDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Entities.SubEntities.Support;
 import com.example.ECommerce.Entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
@@ -30,5 +28,5 @@ public interface UserMapper {
     @Mapping(target = "reviewIds", ignore = true)
     @Mapping(target = "reports", ignore = true)
     Customer userRegisterationDTOToCustomer(UserRegisterationDTO userDTO); // for support register
-    User userLoginDTOToUser(UserLoginDTO userDTO);
+
 }

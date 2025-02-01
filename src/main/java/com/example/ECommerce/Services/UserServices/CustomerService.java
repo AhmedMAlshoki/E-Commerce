@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CustomerService {
 
@@ -33,11 +36,49 @@ public class CustomerService {
         customer.setRole(Roles.CUSTOMER);
         customer.setPassword(passwordEncoder.encode(userRegisterationDTO.password()));
         customerRepository.save(customer);
-        CustomerDTO customerDTO = customerMapper.CustomertoCustomerDTO(customer);
-        return null;
+        return customerMapper.CustomertoCustomerDTO(customer);
     }
 
     public User getCustomer(Long id) {
-        return null;
+        return customerRepository.findById(id).orElseThrow();
+    }
+
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
+    }
+
+    public Object updateCustomer(Long id, CustomerDTO customerDTO) throws Exception {
+        if (customerRepository.existsById(id)) {
+            Customer customer = customerMapper.CustomerDTOtoCustomer(customerDTO);
+            customerRepository.save(customer);
+            return customerMapper.CustomertoCustomerDTO(customer);
+        } else {
+            throw new Exception("Customer not found");
+        }
+    }
+
+    public List<CustomerDTO> getAllCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+        return customers.stream().map(customerMapper::CustomertoCustomerDTO).collect(Collectors.toList());
+    }
+
+    public List<CustomerDTO> getCustomerWithBalanceGreaterThanOrEqual(double balance) {
+        List <Customer> customers = customerRepository.findByBalanceGreaterThanEqual(balance);
+        return customers.stream().map(customerMapper::CustomertoCustomerDTO).collect(Collectors.toList());
+    }
+
+    public List<CustomerDTO> getCustomerWithBalanceLessThanOrEqual(double balance) {
+        List <Customer> customers = customerRepository.findByBalanceLessThanEqual(balance);
+        return customers.stream().map(customerMapper::CustomertoCustomerDTO).collect(Collectors.toList());
+    }
+
+    public List<CustomerDTO> getCustomerWithBalanceBetween(double minBalance, double maxBalance) {
+        List <Customer> customers = customerRepository.findByBalanceBetween(minBalance, maxBalance);
+        return customers.stream().map(customerMapper::CustomertoCustomerDTO).collect(Collectors.toList());
+    }
+
+    public List<CustomerDTO> getBuyers(Long productId) {
+        List <Customer> customers = customerRepository.getCustomersByPurchasedProduct(productId);
+        return customers.stream().map(customerMapper::CustomertoCustomerDTO).collect(Collectors.toList());
     }
 }

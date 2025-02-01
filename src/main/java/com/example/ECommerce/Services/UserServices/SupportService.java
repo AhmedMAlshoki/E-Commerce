@@ -37,6 +37,10 @@ public class SupportService {
     }
 
     public User getSupport(Long id) {
-        return null;
+        return supportRepository.findById(id).orElseThrow();
+    }
+
+    public void deleteSupport(Long id) {
+        supportRepository.deleteById(id);
     }
 }

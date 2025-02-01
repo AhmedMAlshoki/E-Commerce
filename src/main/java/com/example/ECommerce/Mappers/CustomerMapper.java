@@ -16,5 +16,12 @@ public interface CustomerMapper {
 
     // Map CustomerDTO back to Customer entity
     @Mapping(source = "personalAddress", target = "personalAddress")
+    @Mapping(target = "loyaltyPoints", ignore = true)
+    @Mapping(target = "purchasedProducts", ignore = true)
+    @Mapping(target = "wishListedProducts", ignore = true)
+    @Mapping(target = "orderIds", ignore = true)
+    @Mapping(target = "carts", ignore = true)
+    @Mapping(target = "reviewIds", ignore = true)
+    @Mapping(target = "reports", ignore = true)
     Customer CustomerDTOtoCustomer(CustomerDTO customerDTO);
 }

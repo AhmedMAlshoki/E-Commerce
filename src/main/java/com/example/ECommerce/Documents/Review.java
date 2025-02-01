@@ -15,6 +15,4 @@ public class Review {
     private String productId;
     private int rating;
     private String comment;
-    @CreatedDate
-    private Date createdAt;
 }

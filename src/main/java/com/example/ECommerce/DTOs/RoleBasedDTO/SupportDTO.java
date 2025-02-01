@@ -4,5 +4,5 @@ import com.example.ECommerce.Entities.Report;
 
 import java.util.Set;
 
-public record SupportDTO(UserDTO userInfo , Set<Report> reportsSolved)  implements UserDTO {
+public record SupportDTO(Long id,String username, String email, String phoneNumber)  implements UserDTO {
 }

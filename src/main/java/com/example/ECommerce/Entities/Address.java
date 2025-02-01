@@ -4,12 +4,15 @@ import com.example.ECommerce.Enums.Country;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@OnDelete(action = OnDeleteAction.CASCADE)
 @Table(name = "address")
 public class Address {
     @Id

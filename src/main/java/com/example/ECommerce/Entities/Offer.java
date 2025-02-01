@@ -6,6 +6,8 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,10 +23,9 @@ public class Offer {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Seller seller;
-    @ColumnDefault("0")
-    private double discount;
-    private String startDate;
-    private String endDate;
+    private double discount=0.0;
+    private String startDate = new Date(Date.from(new Date().toInstant()).getTime()).toString();
+    private String endDate = new Date(Date.from(new Date().toInstant()).getTime() + 24 * 60 * 60 * 1000).toString();
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

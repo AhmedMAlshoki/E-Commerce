@@ -24,6 +24,4 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private STATUS status;
     int quantity;
-    @CreatedDate
-    private Date orderDate;
 }

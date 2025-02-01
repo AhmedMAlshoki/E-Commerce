@@ -3,7 +3,6 @@ package com.example.ECommerce.Repositories;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
-import com.mongodb.internal.Iterables;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

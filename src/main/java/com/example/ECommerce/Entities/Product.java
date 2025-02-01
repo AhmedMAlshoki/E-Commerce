@@ -3,7 +3,6 @@ package com.example.ECommerce.Entities;
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

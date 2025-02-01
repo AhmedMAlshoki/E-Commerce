@@ -39,17 +39,11 @@ public class UserService {
         Roles role = userRegisterationDTO.isBusinessAccount() ? Roles.CUSTOMER : Roles.SUPPORT;
 
 
-
-        UserDTO userDTO = null;
-        switch (role) {
-            case CUSTOMER:
-                userDTO = customerService.registerCustomer(userRegisterationDTO);
-                break;
-            case SUPPORT:
-                userDTO = supportService.registerSupport(userRegisterationDTO);
-                break;
-        }
-        return userDTO;
+        return switch (role) {
+            case CUSTOMER -> customerService.registerCustomer(userRegisterationDTO);
+            case SUPPORT -> supportService.registerSupport(userRegisterationDTO);
+            default -> null;
+        };
     }
 
     public List<User> getRoleUsers(String role) {
@@ -67,4 +61,17 @@ public class UserService {
             case SELLER -> sellerService.getSeller(id);
         };
     }
+
+    public void deleteUser(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        Roles role = user.getRole();
+        switch (role) {
+            case CUSTOMER -> customerService.deleteCustomer(id);
+            case SUPPORT -> supportService.deleteSupport(id);
+            case ADMIN -> adminService.deleteAdmin(id);
+            case SELLER -> sellerService.deleteSeller(id);
+        }
+    }
+
+
 }
