@@ -17,17 +17,20 @@ public class UserDetailsImp implements UserDetails {
     @Serial
     private static final long serialVersionUID = 1L;
 
+
     private Long id;
     private String username;
     private Collection<? extends GrantedAuthority> role;
     @JsonIgnore
     private String password; //Should use PasswordEncoder here or At UserDetailImp
 
+    private Roles simpleRole;
     public UserDetailsImp(){}
     public UserDetailsImp(String username,String password, Roles role) {
         this.username = username;
         this.password = password;
         this.role = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
+        this.simpleRole = role;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -71,5 +74,14 @@ public class UserDetailsImp implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser(){
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setRole(simpleRole);
+        return user;
     }
 }

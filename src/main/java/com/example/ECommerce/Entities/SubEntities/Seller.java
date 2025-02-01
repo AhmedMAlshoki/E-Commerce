@@ -7,6 +7,8 @@ import com.example.ECommerce.Entities.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "sellers")
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Seller extends Customer {
     private String businessName;
     private String taxId;

@@ -5,11 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "admins")
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Admin extends Support {
 
 }

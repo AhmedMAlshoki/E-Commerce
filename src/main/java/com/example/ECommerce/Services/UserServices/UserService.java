@@ -9,16 +9,23 @@ import com.example.ECommerce.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final CustomerService customerService;
     private final SupportService supportService;
+    private final AdminService adminService;
+    private final SellerService sellerService;
     @Autowired
-    public UserService(UserRepository userRepository, CustomerService customerService , SupportService supportService) {
+    public UserService(UserRepository userRepository, CustomerService customerService , SupportService supportService,
+                       AdminService adminService , SellerService sellerService) {
         this.userRepository = userRepository;
         this.customerService = customerService;
         this.supportService = supportService;
+        this.adminService = adminService;
+        this.sellerService = sellerService;
     }
 
 
@@ -37,9 +44,27 @@ public class UserService {
         switch (role) {
             case CUSTOMER:
                 userDTO = customerService.registerCustomer(userRegisterationDTO);
+                break;
             case SUPPORT:
-                userDTO =supportService.registerSupport(userRegisterationDTO);
+                userDTO = supportService.registerSupport(userRegisterationDTO);
+                break;
         }
         return userDTO;
+    }
+
+    public List<User> getRoleUsers(String role) {
+        return userRepository.findByRole(Roles.valueOf(role));
+    }
+
+
+    public User getUser(Long id) throws Exception {
+        User user = userRepository.findById(id).orElseThrow();
+        Roles role = user.getRole();
+        return switch (role) {
+            case CUSTOMER -> customerService.getCustomer(id);
+            case SUPPORT -> supportService.getSupport(id);
+            case ADMIN -> adminService.getAdmin(id);
+            case SELLER -> sellerService.getSeller(id);
+        };
     }
 }
