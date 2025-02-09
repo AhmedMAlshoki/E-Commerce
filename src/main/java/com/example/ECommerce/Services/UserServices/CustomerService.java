@@ -8,6 +8,8 @@ import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.CustomerMapper;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.CustomerRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,22 +41,21 @@ public class CustomerService {
         return customerMapper.CustomertoCustomerDTO(customer);
     }
 
-    public User getCustomer(Long id) {
-        return customerRepository.findById(id).orElseThrow();
+    public CustomerDTO getCustomer(Long id) {
+        return customerMapper.CustomertoCustomerDTO(customerRepository.findById(id).orElseThrow());
     }
 
     public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
     }
 
-    public Object updateCustomer(Long id, CustomerDTO customerDTO) throws Exception {
-        if (customerRepository.existsById(id)) {
-            Customer customer = customerMapper.CustomerDTOtoCustomer(customerDTO);
-            customerRepository.save(customer);
-            return customerMapper.CustomertoCustomerDTO(customer);
-        } else {
-            throw new Exception("Customer not found");
-        }
+    public CustomerDTO updateCustomer(Long id, JsonNode jsonNode){
+        ObjectMapper objectMapper = new ObjectMapper();
+        CustomerDTO customerDTO = objectMapper.convertValue(jsonNode,CustomerDTO.class); //Convert Json to Dto OBJECT WITH NESTED ADDRESS dto
+        //-----------------------------------------------------------------------------------------
+        Customer customer = customerMapper.CustomerDTOtoCustomer(customerDTO);
+        customerRepository.save(customer);
+        return customerDTO;
     }
 
     public List<CustomerDTO> getAllCustomers() {

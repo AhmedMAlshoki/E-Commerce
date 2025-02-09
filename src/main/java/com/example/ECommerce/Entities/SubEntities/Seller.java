@@ -1,5 +1,6 @@
 package com.example.ECommerce.Entities.SubEntities;
 
+import com.example.ECommerce.DTOs.RoleBasedDTO.CustomerDTO;
 import com.example.ECommerce.Entities.Address;
 import com.example.ECommerce.Entities.Offer;
 import com.example.ECommerce.Entities.Product;
@@ -17,6 +18,13 @@ import java.util.List;
 @Entity
 @Table(name = "sellers")
 @OnDelete(action = OnDeleteAction.CASCADE)
+@NamedEntityGraphs(
+        {
+                 @NamedEntityGraph(name = "SellerWithProducts",attributeNodes = {@NamedAttributeNode("ownedProducts")}),
+                 @NamedEntityGraph(name = "SellerWithOffers",attributeNodes = {@NamedAttributeNode("offers")}),
+                @NamedEntityGraph(name = "ShippingAddress",attributeNodes = {@NamedAttributeNode("shippingAddress")})
+        }
+)
 public class Seller extends Customer {
     private String businessName;
     private String taxId;
@@ -25,5 +33,7 @@ public class Seller extends Customer {
     @OneToMany
     private List<Product> ownedProducts = new ArrayList<>();
     @OneToMany
-    private List<Offer> offers; // List of offers made by the seller <Offer>
+    private List<Offer> offers;// List of offers made by the seller <Offer>
+
+
 }

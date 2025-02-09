@@ -27,10 +27,10 @@ public class Customer extends User {
     @Nullable
     @OneToOne
     private Address personalAddress;
-    private Double balance = 0.0;
-    private Double amountSpent = 0.0;
-    private Double amountSaved = 0.0;
-    private Integer loyaltyPoints = 0;
+    private Double balance ;
+    private Double amountSpent;
+    private Double amountSaved;
+    private Integer loyaltyPoints;
     @ManyToMany
     //EntityGraph
     @JoinTable(
@@ -53,16 +53,15 @@ public class Customer extends User {
     @Nullable
     private List<String> orderIds = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Cart> carts = new HashSet<>();
 
-    Boolean isSeller = false;
 
     @ElementCollection
     @Nullable
     List<String> reviewIds = new ArrayList<>();
 
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     List<Report> reports = new ArrayList<>();
 }

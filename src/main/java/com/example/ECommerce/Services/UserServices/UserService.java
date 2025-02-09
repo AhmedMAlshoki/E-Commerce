@@ -6,6 +6,7 @@ import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.UserRepository;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,8 +51,12 @@ public class UserService {
         return userRepository.findByRole(Roles.valueOf(role));
     }
 
+    public Roles getUserRole(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        return user.getRole();
+    }
 
-    public User getUser(Long id) throws Exception {
+    public UserDTO getUser(Long id) throws Exception {
         User user = userRepository.findById(id).orElseThrow();
         Roles role = user.getRole();
         return switch (role) {
@@ -74,4 +79,15 @@ public class UserService {
     }
 
 
+    public UserDTO updateUser(Long id, JsonNode jsonObject) {
+        User user = userRepository.findById(id).orElseThrow();
+        Roles role = user.getRole();
+       /* return switch (role) {
+       //      case CUSTOMER -> customerService.updateCustomer(id, jsonObject);
+            //case SUPPORT -> supportService.updateSupport(id, jsonObject);
+            //case ADMIN -> adminService.updateAdmin(id, jsonObject);
+            //case SELLER -> sellerService.updateSeller(id, jsonObject);
+       // };*/
+        return null;
+    }
 }

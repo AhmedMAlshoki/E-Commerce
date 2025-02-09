@@ -12,18 +12,24 @@ import java.util.Optional;
 
 @Repository
 @NamedQuery(name = "Customer.getCustomersByPurchasedProduct",
-        query = "select c from Customer c join c.purchasedProducts p where p.id = ?1")//select u from User u where u.emailAddress = ?1")
+        query = "select c from Customer c join c.purchasedProducts p where p.id = ?1")
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Override
-    @EntityGraph(value = "customerGraphAddress")
+    @EntityGraph(value = "customerGraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
     Optional<Customer> findById(Long id);
 
+    @EntityGraph(value = "customerGraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
     List<Customer> findByBalanceGreaterThanEqual(Double balance);
 
+    @EntityGraph(value = "customerGraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
     List<Customer>  findByBalanceLessThanEqual(Double balance);
 
+    @EntityGraph(value = "customerGraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
     List<Customer> findByBalanceBetween(Double minBalance, Double maxBalance);
 
 
+    @EntityGraph(value = "customerGraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
     List<Customer> getCustomersByPurchasedProduct(Long productId);
+
+
 }

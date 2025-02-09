@@ -4,6 +4,7 @@ import com.example.ECommerce.DTOs.RoleBasedDTO.UserDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Services.UserServices.UserService;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +53,7 @@ public class UserController {
     }
 
     @GetMapping("user/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(userService.getUser(id));
         }
@@ -72,6 +73,14 @@ public class UserController {
         }
     }
 
-
+    @PutMapping("user/{id}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody JsonNode jsonObject) {
+        try {
+            return ResponseEntity.ok(userService.updateUser(id, jsonObject));
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.ECommerce.Entities;
 
 import com.example.ECommerce.Entities.SubEntities.Seller;
+import com.example.ECommerce.Enums.Categories;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -15,6 +16,12 @@ import java.util.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "product")
+//@NamedEntityGraph(name = "ProductOwner", attributeNodes = @NamedAttributeNode("owner"))
+//@NamedEntityGraph(name = "ProductOffer", attributeNodes = @NamedAttributeNode("offer"))
+@NamedEntityGraphs({
+    @NamedEntityGraph(name = "ProductOwner", attributeNodes = {@NamedAttributeNode("owner")}),
+    @NamedEntityGraph(name = "ProductOfferAndOwner", attributeNodes = {@NamedAttributeNode("offer"), @NamedAttributeNode("owner")})
+})
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,12 +29,11 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    private double price;
-    private int quantity;
+    private double price=0.0;
+    private int quantity=1;
     private Double rating;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Enumerated(EnumType.STRING)
+    private Categories category;
     @ManyToOne
     @CreatedBy
     @JoinColumn(name = "user_id")
@@ -42,4 +48,6 @@ public class Product {
     @LastModifiedDate
     @Column(name = "updated_at")
     private Date updatedAt;
+
+
 }

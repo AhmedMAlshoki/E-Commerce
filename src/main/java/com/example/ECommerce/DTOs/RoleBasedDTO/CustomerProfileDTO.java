@@ -24,8 +24,6 @@ public record CustomerProfileDTO(Long id,String name, String email, Date created
                                  Roles role, Double balance, AddressDTO personalAddress,
                                  Set<ProductDTO> wishListedProducts,
                                  Set<ProductDTO> purchasedProducts ,
-                                 //Set<ReviewDTO> reviews ,
                                  Set<OrderDTO> orders
-                                 //List<ReportDTO> reports
 ) implements UserProfileDTO {
 }

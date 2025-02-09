@@ -1,6 +1,7 @@
 package com.example.ECommerce.Services.UserServices;
 
 import com.example.ECommerce.DTOs.RoleBasedDTO.SupportDTO;
+import com.example.ECommerce.DTOs.RoleBasedDTO.UserDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.SubEntities.Support;
 import com.example.ECommerce.Entities.User;
@@ -36,8 +37,8 @@ public class SupportService {
         return null;
     }
 
-    public User getSupport(Long id) {
-        return supportRepository.findById(id).orElseThrow();
+    public UserDTO getSupport(Long id) {
+        return supportMapper.supportToSupportDTO(supportRepository.findById(id).orElseThrow());
     }
 
     public void deleteSupport(Long id) {

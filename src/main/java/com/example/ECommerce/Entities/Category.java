@@ -20,9 +20,9 @@ public class Category {
     @Column(name = "id", nullable = false)
     private Long id;
     @Enumerated(EnumType.STRING)
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private Categories name ;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     private LinkedList<Product> products = new LinkedList<>();
 
 }

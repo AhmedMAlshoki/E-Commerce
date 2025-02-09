@@ -15,15 +15,6 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PutMapping("/customer/{id}")
-    public ResponseEntity<?> updateCustomer(Long id, CustomerDTO customerDTO) {
-        try {
-            return ResponseEntity.ok(customerService.updateCustomer(id, customerDTO));
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 
     @GetMapping("product/{productId}/buyers")
     public ResponseEntity<?> getBuyers(Long productId) {
@@ -76,4 +67,5 @@ public class CustomerController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
 }
