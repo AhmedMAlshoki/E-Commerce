@@ -49,5 +49,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByCategoryNameANDHasOffer(Categories categoryName);
 
     @EntityGraph(value = "ProductOfferAndOwner",type =  EntityGraph.EntityGraphType.FETCH)
+    //Also for purchase products
     Product findProductByIdProfile(Long id);
+
 }

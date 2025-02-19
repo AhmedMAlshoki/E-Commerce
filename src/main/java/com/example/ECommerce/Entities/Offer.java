@@ -14,6 +14,19 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "offer")
+@NamedEntityGraphs({
+    @NamedEntityGraph(name = "offerWithSeller", attributeNodes = {
+        @NamedAttributeNode("seller")
+    }),
+    @NamedEntityGraph(name = "offerWithProduct", attributeNodes = {
+        @NamedAttributeNode("product")
+    }),
+        @NamedEntityGraph(name = "offerWithProductAndSeller", attributeNodes = {
+                @NamedAttributeNode("product"),
+                @NamedAttributeNode("seller")
+        })
+
+})
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,10 +37,9 @@ public class Offer {
     @JoinColumn(name = "user_id")
     private Seller seller;
     private double discount=0.0;
-    private String startDate = new Date(Date.from(new Date().toInstant()).getTime()).toString();
-    private String endDate = new Date(Date.from(new Date().toInstant()).getTime() + 24 * 60 * 60 * 1000).toString();
+    private Date startDate = new Date(Date.from(new Date().toInstant()).getTime());
+    private Date endDate = new Date(Date.from(new Date().toInstant()).getTime() + 24 * 60 * 60 * 1000);
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
 }

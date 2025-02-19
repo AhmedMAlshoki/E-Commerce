@@ -41,6 +41,10 @@ public class CustomerService {
         return customerMapper.CustomertoCustomerDTO(customer);
     }
 
+    public Customer getCustomerToPromote(Long id) {
+        return customerRepository.findById(id).orElseThrow();
+    }
+
     public CustomerDTO getCustomer(Long id) {
         return customerMapper.CustomertoCustomerDTO(customerRepository.findById(id).orElseThrow());
     }
