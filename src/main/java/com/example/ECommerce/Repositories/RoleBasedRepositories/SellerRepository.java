@@ -5,6 +5,7 @@ import com.example.ECommerce.Enums.Categories;
 import org.hibernate.annotations.NamedQuery;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,6 +22,12 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
 
 
     @Override
+    @NonNull
     @EntityGraph(value = "ShippingAddress",type =  EntityGraph.EntityGraphType.FETCH)
     Optional<Seller> findById(Long id);
+
+    /*
+    * Get seller profile
+    * Seller findByIdForProfile(Long id);
+    * */
 }

@@ -4,8 +4,6 @@ import com.example.ECommerce.DTOs.OfferDTO;
 import com.example.ECommerce.DTOs.ProductDTO;
 import com.example.ECommerce.DTOs.RoleBasedDTO.SellerDTO;
 import com.example.ECommerce.Entities.Offer;
-import com.example.ECommerce.Entities.Product;
-import com.example.ECommerce.Entities.SubEntities.Seller;
 import com.example.ECommerce.Mappers.OfferMapper;
 import com.example.ECommerce.Mappers.ProductMapper;
 import com.example.ECommerce.Mappers.SellerMapper;

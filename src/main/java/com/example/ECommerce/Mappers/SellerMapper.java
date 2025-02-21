@@ -28,5 +28,6 @@ public interface SellerMapper {
     @Mapping(target = "taxId", ignore = true)
     @Mapping(target = "ownedProducts", ignore = true)
     @Mapping(target = "offers", ignore = true)
+    @Mapping(target = "role", ignore = true)
     Seller sellerDTOToSeller(SellerDTO sellerDTO);
 }

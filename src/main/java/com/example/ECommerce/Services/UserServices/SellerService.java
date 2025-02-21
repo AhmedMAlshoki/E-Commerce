@@ -83,5 +83,6 @@ public class SellerService  {
     /*
     * Update seller
     * public void updateSeller(SellerDTO sellerDTO)
+    * public SellerProfileDTO getSellerProfile(Long id)
     * */
 }

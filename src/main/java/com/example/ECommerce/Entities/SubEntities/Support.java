@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.HashSet;
 import java.util.Set;
-
+@NamedEntityGraph(name = "support-entity-graph", attributeNodes = @NamedAttributeNode("reportsSolved"))
 @Getter
 @Setter
 @Entity

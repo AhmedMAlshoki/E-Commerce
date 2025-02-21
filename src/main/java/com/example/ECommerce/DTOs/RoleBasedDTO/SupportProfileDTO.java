@@ -1,4 +1,10 @@
 package com.example.ECommerce.DTOs.RoleBasedDTO;
 
-public record SupportProfileDTO() implements UserProfileDTO {
+import com.example.ECommerce.DTOs.ReportDTO;
+
+import java.util.List;
+
+public record SupportProfileDTO(
+        Long id,String username, String email, String phoneNumber, List<ReportDTO> solverReports
+) implements UserProfileDTO {
 }

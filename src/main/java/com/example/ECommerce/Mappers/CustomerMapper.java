@@ -24,5 +24,6 @@ public interface CustomerMapper {
     @Mapping(target = "reviewIds", ignore = true)
     @Mapping(target = "reports", ignore = true)
     @Mapping(target = "password", ignore = true)
+    @Mapping(target = "role", ignore = true)
     Customer CustomerDTOtoCustomer(CustomerDTO customerDTO);
 }
