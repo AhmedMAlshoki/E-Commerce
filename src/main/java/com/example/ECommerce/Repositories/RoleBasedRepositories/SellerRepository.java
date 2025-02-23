@@ -23,7 +23,7 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
 
     @Override
     @NonNull
-    @EntityGraph(value = "ShippingAddress",type =  EntityGraph.EntityGraphType.FETCH)
+    @EntityGraph(value = "GraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
     Optional<Seller> findById(Long id);
 
     /*

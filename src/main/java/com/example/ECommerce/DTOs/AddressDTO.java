@@ -2,7 +2,9 @@ package com.example.ECommerce.DTOs;
 
 import com.example.ECommerce.Enums.Country;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record AddressDTO(
         Long id,
         @JsonIgnore

@@ -82,12 +82,16 @@ public class UserService {
     public UserDTO updateUser(Long id, JsonNode jsonObject) {
         User user = userRepository.findById(id).orElseThrow();
         Roles role = user.getRole();
-       /* return switch (role) {
-       //      case CUSTOMER -> customerService.updateCustomer(id, jsonObject);
-            //case SUPPORT -> supportService.updateSupport(id, jsonObject);
-            //case ADMIN -> adminService.updateAdmin(id, jsonObject);
-            //case SELLER -> sellerService.updateSeller(id, jsonObject);
-       // };*/
-        return null;
+        try {
+            return switch (role) {
+                case CUSTOMER -> customerService.updateCustomer(id, jsonObject);
+                case SUPPORT -> supportService.updateSupport(id, jsonObject);
+                case ADMIN -> adminService.updateAdmin(id, jsonObject);
+                case SELLER -> sellerService.updateSeller(id, jsonObject);
+            };
+        }
+        catch (Exception e) {
+            throw new RuntimeException("Failed to update user", e);
+        }
     }
 }

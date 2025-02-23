@@ -20,6 +20,8 @@ public interface SupportRepository extends JpaRepository<Support, Long> {
 
     void deleteById(Long id);
 
+    Support save(Long id);
+
     @Override
     @NonNull
     List<Support> findAll();

@@ -3,7 +3,11 @@ package com.example.ECommerce.Mappers;
 import com.example.ECommerce.DTOs.RoleBasedDTO.AdminDTO;
 import com.example.ECommerce.DTOs.RoleBasedDTO.UserDTO;
 import com.example.ECommerce.Entities.SubEntities.Admin;
+import org.mapstruct.Mapping;
 
 public interface AdminMapper {
+
+    @Mapping(target = "reportsSolved",ignore = true)
+    Admin AdminDTOToAdmin(AdminDTO adminDTO);
     AdminDTO AdminToAdminDTO(Admin admin);
 }

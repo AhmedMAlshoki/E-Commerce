@@ -10,10 +10,14 @@ import com.example.ECommerce.Mappers.ProfileMapper;
 import com.example.ECommerce.Mappers.SupportMapper;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.SupportRepository;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +61,18 @@ public class SupportService {
     public Support getSupportByIdToPromote(Long id) {
         return supportRepository.findById(id).orElseThrow();
     }
+
+    public SupportDTO updateSupport(Long id, JsonNode jsonNode) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper() .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);;
+        Support existingSupport = supportRepository.findById(id).orElseThrow();
+        existingSupport = objectMapper.readerForUpdating(existingSupport).readValue(jsonNode);
+        supportRepository.save(existingSupport);
+        //To make sure the updated Address will be returned within the entity
+        Support theUpdatedSupport = supportRepository.findById(id).orElseThrow();
+        return supportMapper.supportToSupportDTO(theUpdatedSupport);
+    }
+
+
     /*
     * Get Support Profile
     * SupportProfileDTO getTheProfile(Long id){

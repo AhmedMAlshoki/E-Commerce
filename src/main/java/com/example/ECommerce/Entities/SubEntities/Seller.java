@@ -22,7 +22,9 @@ import java.util.List;
         {
                  @NamedEntityGraph(name = "SellerWithProducts",attributeNodes = {@NamedAttributeNode("ownedProducts")}),
                  @NamedEntityGraph(name = "SellerWithOffers",attributeNodes = {@NamedAttributeNode("offers")}),
-                @NamedEntityGraph(name = "ShippingAddress",attributeNodes = {@NamedAttributeNode("shippingAddress")})
+                @NamedEntityGraph(name = "ShippingAddress",attributeNodes = {@NamedAttributeNode("shippingAddress")}),
+                @NamedEntityGraph(name = "GraphPersonalAddress", attributeNodes = @NamedAttributeNode("personalAddress")),
+                @NamedEntityGraph(name = "GraphAddress", attributeNodes = {@NamedAttributeNode("personalAddress"),@NamedAttributeNode("shippingAddress")})
         }
 )
 public class Seller extends Customer {

@@ -2,18 +2,22 @@ package com.example.ECommerce.Services.UserServices;
 
 import com.example.ECommerce.DTOs.RoleBasedDTO.CustomerDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
+import com.example.ECommerce.Entities.Address;
 import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.CustomerMapper;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.CustomerRepository;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,13 +57,32 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public CustomerDTO updateCustomer(Long id, JsonNode jsonNode){
-        ObjectMapper objectMapper = new ObjectMapper();
-        CustomerDTO customerDTO = objectMapper.convertValue(jsonNode,CustomerDTO.class); //Convert Json to Dto OBJECT WITH NESTED ADDRESS dto
-        //-----------------------------------------------------------------------------------------
-        Customer customer = customerMapper.CustomerDTOtoCustomer(customerDTO);
-        customerRepository.save(customer);
-        return customerDTO;
+    public CustomerDTO updateCustomer(Long id, JsonNode jsonNode) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper() .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);;
+        Customer existingCustomer = customerRepository.findById(id).orElseThrow();
+        JsonNode newJsonNode = handlingJsonPersonalAddress(jsonNode,objectMapper,existingCustomer);//Convert Json to Dto OBJECT WITH NESTED ADDRESS dto
+        existingCustomer = objectMapper.readerForUpdating(existingCustomer).readValue(newJsonNode);
+        customerRepository.save(existingCustomer);
+        //To make sure the updated Address will be returned within the entity
+        Customer theupdatedCustomer = customerRepository.findById(id).orElseThrow();
+        return customerMapper.CustomertoCustomerDTO(theupdatedCustomer);
+    }
+
+    private JsonNode handlingJsonPersonalAddress(JsonNode jsonNode,ObjectMapper objectMapper,Customer existingCustomer) throws IOException
+    {
+            JsonNode addressNode = jsonNode.get("personalAddress");
+            Address updatedAddress;
+            if (existingCustomer.getPersonalAddress() != null) {
+                // Merge into existing Address
+                updatedAddress = objectMapper.readerForUpdating(existingCustomer.getPersonalAddress())
+                        .readValue(addressNode);
+            } else {
+                // Create new Address
+                updatedAddress = objectMapper.treeToValue(addressNode, Address.class);
+            }
+            existingCustomer.setPersonalAddress(updatedAddress);
+            ((ObjectNode) jsonNode).remove("personalAddress");
+            return jsonNode;
     }
 
     public List<CustomerDTO> getAllCustomers() {

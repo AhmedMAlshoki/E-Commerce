@@ -1,18 +1,19 @@
 package com.example.ECommerce.Services.UserServices;
-
-import com.example.ECommerce.DTOs.RoleBasedDTO.CustomerDTO;
 import com.example.ECommerce.DTOs.RoleBasedDTO.SellerDTO;
-import com.example.ECommerce.DTOs.RoleBasedDTO.UserDTO;
+import com.example.ECommerce.Entities.Address;
 import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Entities.SubEntities.Seller;
-import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
-import com.example.ECommerce.Mappers.AddressMapper;
 import com.example.ECommerce.Mappers.SellerMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.SellerRepository;
-import com.example.ECommerce.Repositories.UserRepository;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 public class SellerService  {
@@ -80,6 +81,55 @@ public class SellerService  {
     private void addSeller(Seller seller) {
         sellerRepository.save(seller);
     }
+
+    public SellerDTO updateSeller(Long id, JsonNode jsonNode) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper() .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);;
+        Seller existingSeller = sellerRepository.findById(id).orElseThrow();
+        JsonNode newJsonNode = handlingJsonPersonalAddress(jsonNode,objectMapper,existingSeller);
+        JsonNode newJsonNode1 = handlingJsonShippingAddress(newJsonNode,objectMapper,existingSeller);
+        existingSeller = objectMapper.readerForUpdating(existingSeller).readValue(newJsonNode1);
+        sellerRepository.save(existingSeller);
+        //To make sure the updated Address will be returned within the entity
+        Seller theUpdatedSeller = sellerRepository.findById(id).orElseThrow();
+        return sellerMapper.sellerToSellerDTO(theUpdatedSeller);
+    }
+    private JsonNode handlingJsonPersonalAddress(JsonNode jsonNode,ObjectMapper objectMapper,Seller existingSeller) throws IOException {
+
+            JsonNode addressNode = jsonNode.get("personalAddress");
+            Address updatedAddress;
+            if (existingSeller.getPersonalAddress() != null) {
+                // Merge into existing Address
+                updatedAddress = objectMapper.readerForUpdating(existingSeller.getPersonalAddress())
+                        .readValue(addressNode);
+            } else {
+                // Create new Address
+                updatedAddress = objectMapper.treeToValue(addressNode, Address.class);
+            }
+            existingSeller.setPersonalAddress(updatedAddress);
+            ((ObjectNode) jsonNode).remove("personalAddress");
+            return jsonNode;
+
+    }
+
+    private JsonNode handlingJsonShippingAddress(JsonNode jsonNode,ObjectMapper objectMapper,Seller existingSeller) throws IOException {
+
+            JsonNode addressNode = jsonNode.get("shippingAddress");
+            Address updatedAddress;
+            if (existingSeller.getShippingAddress() != null) {
+                // Merge into existing Address
+                updatedAddress = objectMapper.readerForUpdating(existingSeller.getShippingAddress())
+                        .readValue(addressNode);
+            } else {
+                // Create new Address
+                updatedAddress = objectMapper.treeToValue(addressNode, Address.class);
+            }
+            existingSeller.setShippingAddress(updatedAddress);
+            ((ObjectNode) jsonNode).remove("shippingAddress");
+            return jsonNode;
+
+    }
+
+
     /*
     * Update seller
     * public void updateSeller(SellerDTO sellerDTO)
