@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @NamedQuery(name = "Seller.findByCategory", query = "SELECT s FROM Seller s Join Product p ON s.id = p.owner.id AND p.category = :category")
+@NamedQuery(name = "Seller.findByIdForProfile", query = "SELECT s FROM Seller s  s.id = :id")
 @Repository
 public interface SellerRepository extends JpaRepository<Seller, Long> {
 
@@ -26,8 +27,7 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
     @EntityGraph(value = "GraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
     Optional<Seller> findById(Long id);
 
-    /*
-    * Get seller profile
-    * Seller findByIdForProfile(Long id);
-    * */
+    @EntityGraph(value = "SellerForProfile",type =  EntityGraph.EntityGraphType.FETCH)
+    Seller findByIdForProfile(Long id);
+
 }

@@ -1,6 +1,7 @@
 package com.example.ECommerce.Mappers;
 
 import com.example.ECommerce.DTOs.RoleBasedDTO.CustomerDTO;
+import com.example.ECommerce.DTOs.RoleBasedDTO.CustomerProfileDTO;
 import com.example.ECommerce.Entities.SubEntities.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -26,4 +27,5 @@ public interface CustomerMapper {
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "role", ignore = true)
     Customer CustomerDTOtoCustomer(CustomerDTO customerDTO);
+
 }

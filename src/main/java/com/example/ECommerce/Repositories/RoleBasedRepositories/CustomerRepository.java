@@ -13,6 +13,8 @@ import java.util.Optional;
 @Repository
 @NamedQuery(name = "Customer.getCustomersByPurchasedProduct",
         query = "select c from Customer c join c.purchasedProducts p where p.id = ?1")
+@NamedQuery(name = "Customer.getCustomerForProfile",
+        query = "select c from Customer c where c.id = ?1")
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Override
     @EntityGraph(value = "customerGraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
@@ -31,7 +33,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @EntityGraph(value = "customerGraphAddress",type =  EntityGraph.EntityGraphType.FETCH)
     List<Customer> getCustomersByPurchasedProduct(Long productId);
 
-
+    @EntityGraph(value = "CustomerForProfile",type =  EntityGraph.EntityGraphType.FETCH)
+    Customer getCustomerForProfile(Long id);
 
 
 }

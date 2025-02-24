@@ -22,7 +22,16 @@ import java.util.Set;
 @Entity
 @Table(name = "customers")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedEntityGraph(name = "customerGraphAddress", attributeNodes = @NamedAttributeNode("personalAddress"))
+@NamedEntityGraphs(
+        {
+                @NamedEntityGraph(name = "customerGraphAddress", attributeNodes = @NamedAttributeNode("personalAddress")),
+                @NamedEntityGraph(name = "CustomerForProfile", attributeNodes = {@NamedAttributeNode("personalAddress"),
+                                                                                 @NamedAttributeNode("purchasedProducts"),
+                                                                                 @NamedAttributeNode("wishListedProducts") })
+
+
+        }
+)
 public class Customer extends User {
     @Nullable
     @OneToOne

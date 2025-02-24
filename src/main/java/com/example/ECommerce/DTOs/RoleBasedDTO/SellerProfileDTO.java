@@ -21,7 +21,6 @@ public record SellerProfileDTO(Long id,String name, String email, Date createdAt
                                Double balance, AddressDTO personalAddress,
                                Set<Product> wishListedProducts,
                                Set<Product> purchasedProducts , Set<Review> reviews ,
-                               Set<Order> orders , List<Report> reports,
                                List<Product> ownedProducts,
                                String businessName, AddressDTO shippingAddress
                                , List<Offer> offers) implements UserProfileDTO{

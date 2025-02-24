@@ -1,9 +1,11 @@
 package com.example.ECommerce.Services.UserServices;
 import com.example.ECommerce.DTOs.RoleBasedDTO.SellerDTO;
+import com.example.ECommerce.DTOs.RoleBasedDTO.UserProfileDTO;
 import com.example.ECommerce.Entities.Address;
 import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import com.example.ECommerce.Enums.Roles;
+import com.example.ECommerce.Mappers.ProfilesMapper;
 import com.example.ECommerce.Mappers.SellerMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.SellerRepository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -22,15 +24,17 @@ public class SellerService  {
     private final SellerMapper sellerMapper;
     private final CustomerService customerService;
     private final UserService userService;
+    private final ProfilesMapper profilesMapper;
     @Autowired
     public SellerService(SellerRepository sellerRepository, SellerMapper sellerMapper,
                           CustomerService customerService,
-                            UserService userService)
+                            UserService userService,ProfilesMapper profilesMapper)
     {
         this.sellerRepository = sellerRepository;
         this.sellerMapper = sellerMapper;
         this.customerService = customerService;
         this.userService = userService;
+        this.profilesMapper = profilesMapper;
     }
     public SellerDTO getSeller(Long id) {
         return sellerMapper.sellerToSellerDTO(sellerRepository.findById(id).orElseThrow());
@@ -129,10 +133,8 @@ public class SellerService  {
 
     }
 
-
-    /*
-    * Update seller
-    * public void updateSeller(SellerDTO sellerDTO)
-    * public SellerProfileDTO getSellerProfile(Long id)
-    * */
+    public UserProfileDTO getSellerProfile(Long id) {
+        Seller seller = sellerRepository.findByIdForProfile(id);
+        return profilesMapper.sellerToSellerProfileDTO(seller);
+    }
 }

@@ -23,7 +23,6 @@ public record CustomerProfileDTO(Long id,String name, String email, Date created
                                  Double amountSpent, Double amountSaved, Integer LoyaltyPoints,
                                  Roles role, Double balance, AddressDTO personalAddress,
                                  Set<ProductDTO> wishListedProducts,
-                                 Set<ProductDTO> purchasedProducts ,
-                                 Set<OrderDTO> orders
+                                 Set<ProductDTO> purchasedProducts
 ) implements UserProfileDTO {
 }

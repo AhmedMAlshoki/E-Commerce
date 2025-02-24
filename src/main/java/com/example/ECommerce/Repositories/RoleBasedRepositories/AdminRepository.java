@@ -10,5 +10,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin,Long> {
 
-    AdminDTO adminToAdminDTO(Support theUpdatedSupport);
 }

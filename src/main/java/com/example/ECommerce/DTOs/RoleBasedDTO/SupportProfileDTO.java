@@ -5,6 +5,6 @@ import com.example.ECommerce.DTOs.ReportDTO;
 import java.util.List;
 
 public record SupportProfileDTO(
-        Long id,String username, String email, String phoneNumber, List<ReportDTO> solverReports
+        Long id,String username, String email, String phoneNumber
 ) implements UserProfileDTO {
 }

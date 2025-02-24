@@ -24,7 +24,12 @@ import java.util.List;
                  @NamedEntityGraph(name = "SellerWithOffers",attributeNodes = {@NamedAttributeNode("offers")}),
                 @NamedEntityGraph(name = "ShippingAddress",attributeNodes = {@NamedAttributeNode("shippingAddress")}),
                 @NamedEntityGraph(name = "GraphPersonalAddress", attributeNodes = @NamedAttributeNode("personalAddress")),
-                @NamedEntityGraph(name = "GraphAddress", attributeNodes = {@NamedAttributeNode("personalAddress"),@NamedAttributeNode("shippingAddress")})
+                @NamedEntityGraph(name = "GraphAddress", attributeNodes = {@NamedAttributeNode("personalAddress"),@NamedAttributeNode("shippingAddress")}),
+                @NamedEntityGraph(name = "SellerForProfile", attributeNodes = {@NamedAttributeNode("personalAddress"),
+                                                                               @NamedAttributeNode("shippingAddress"),
+                                                                               @NamedAttributeNode("purchasedProducts"),
+                                                                               @NamedAttributeNode("wishListedProducts"),
+                                                                               @NamedAttributeNode("ownedProducts")})
         }
 )
 public class Seller extends Customer {

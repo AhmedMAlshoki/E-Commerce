@@ -2,11 +2,11 @@ package com.example.ECommerce.Services.UserServices;
 
 import com.example.ECommerce.DTOs.RoleBasedDTO.SupportDTO;
 import com.example.ECommerce.DTOs.RoleBasedDTO.UserDTO;
+import com.example.ECommerce.DTOs.RoleBasedDTO.UserProfileDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.SubEntities.Support;
-import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
-import com.example.ECommerce.Mappers.ProfileMapper;
+import com.example.ECommerce.Mappers.ProfilesMapper;
 import com.example.ECommerce.Mappers.SupportMapper;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.SupportRepository;
@@ -27,13 +27,15 @@ public class SupportService {
     private final UserMapper userMapper;
     private final SupportMapper supportMapper;
     private final PasswordEncoder passwordEncoder;
+    private final ProfilesMapper profilesMapper;
     @Autowired
     public SupportService(SupportRepository supportRepository , UserMapper userMapper,
-                          SupportMapper supportMapper, PasswordEncoder passwordEncoder) {
+                          SupportMapper supportMapper, PasswordEncoder passwordEncoder, ProfilesMapper profilesMapper) {
         this.supportRepository = supportRepository;
         this.userMapper = userMapper;
         this.supportMapper = supportMapper;
         this.passwordEncoder = passwordEncoder;
+        this.profilesMapper = profilesMapper;
     }
 
     public SupportDTO registerSupport(UserRegisterationDTO userRegisterationDTO) {
@@ -70,6 +72,11 @@ public class SupportService {
         //To make sure the updated Address will be returned within the entity
         Support theUpdatedSupport = supportRepository.findById(id).orElseThrow();
         return supportMapper.supportToSupportDTO(theUpdatedSupport);
+    }
+
+    public UserProfileDTO getSupportProfile(Long id) {
+        Support support = supportRepository.findByIdForProfile(id);
+        return profilesMapper.supportToSupportProfileDTO(support);
     }
 
 

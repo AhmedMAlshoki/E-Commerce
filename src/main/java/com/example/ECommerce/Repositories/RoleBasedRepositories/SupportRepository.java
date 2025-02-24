@@ -26,6 +26,6 @@ public interface SupportRepository extends JpaRepository<Support, Long> {
     @NonNull
     List<Support> findAll();
 
-    @EntityGraph(value = "support-entity-graph",type =  EntityGraph.EntityGraphType.FETCH)
+    //@EntityGraph(value = "support-entity-graph",type =  EntityGraph.EntityGraphType.FETCH)
     Support findByIdForProfile(Long id);
 }

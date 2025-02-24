@@ -1,6 +1,7 @@
 package com.example.ECommerce.Services.UserServices;
 
 import com.example.ECommerce.DTOs.RoleBasedDTO.UserDTO;
+import com.example.ECommerce.DTOs.RoleBasedDTO.UserProfileDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
@@ -93,5 +94,16 @@ public class UserService {
         catch (Exception e) {
             throw new RuntimeException("Failed to update user", e);
         }
+    }
+
+    public UserProfileDTO getUserProfile(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        Roles role = user.getRole();
+        return switch (role) {
+            case CUSTOMER -> customerService.getCustomerProfile(id);
+            case SUPPORT -> supportService.getSupportProfile(id);
+            case ADMIN -> adminService.getAdminProfile(id);
+            case SELLER -> sellerService.getSellerProfile(id);
+        };
     }
 }

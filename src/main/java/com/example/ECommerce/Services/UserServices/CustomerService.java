@@ -1,12 +1,13 @@
 package com.example.ECommerce.Services.UserServices;
 
 import com.example.ECommerce.DTOs.RoleBasedDTO.CustomerDTO;
+import com.example.ECommerce.DTOs.RoleBasedDTO.UserProfileDTO;
 import com.example.ECommerce.DTOs.UserRegisterationDTO;
 import com.example.ECommerce.Entities.Address;
 import com.example.ECommerce.Entities.SubEntities.Customer;
-import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.CustomerMapper;
+import com.example.ECommerce.Mappers.ProfilesMapper;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.CustomerRepository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -28,13 +29,16 @@ public class CustomerService {
     private final UserMapper userMapper;
     private final CustomerMapper customerMapper;
     private final PasswordEncoder passwordEncoder;
+    private final ProfilesMapper profilesMapper ;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, UserMapper userMapper, CustomerMapper customerMapper, PasswordEncoder passwordEncoder) {
+    public CustomerService(CustomerRepository customerRepository, UserMapper userMapper, CustomerMapper customerMapper, PasswordEncoder passwordEncoder,
+                            ProfilesMapper profilesMapper) {
         this.customerRepository = customerRepository;
         this.userMapper = userMapper;
         this.customerMapper = customerMapper;
         this.passwordEncoder = passwordEncoder;
+        this.profilesMapper = profilesMapper;
     }
 
     public CustomerDTO registerCustomer(UserRegisterationDTO userRegisterationDTO) {
@@ -108,5 +112,10 @@ public class CustomerService {
     public List<CustomerDTO> getBuyers(Long productId) {
         List <Customer> customers = customerRepository.getCustomersByPurchasedProduct(productId);
         return customers.stream().map(customerMapper::CustomertoCustomerDTO).collect(Collectors.toList());
+    }
+
+    public UserProfileDTO getCustomerProfile(Long id) {
+        Customer customer = customerRepository.getCustomerForProfile(id);
+        return profilesMapper.customerToCustomerProfileDTO(customer);
     }
 }

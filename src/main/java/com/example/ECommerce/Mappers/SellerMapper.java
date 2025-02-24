@@ -1,6 +1,7 @@
 package com.example.ECommerce.Mappers;
 
 import com.example.ECommerce.DTOs.RoleBasedDTO.SellerDTO;
+import com.example.ECommerce.DTOs.RoleBasedDTO.SellerProfileDTO;
 import com.example.ECommerce.DTOs.RoleBasedDTO.UserDTO;
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import org.mapstruct.Mapper;
@@ -30,4 +31,5 @@ public interface SellerMapper {
     @Mapping(target = "offers", ignore = true)
     @Mapping(target = "role", ignore = true)
     Seller sellerDTOToSeller(SellerDTO sellerDTO);
+
 }

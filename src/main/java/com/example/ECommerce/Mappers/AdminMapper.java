@@ -7,7 +7,6 @@ import org.mapstruct.Mapping;
 
 public interface AdminMapper {
 
-    @Mapping(target = "reportsSolved",ignore = true)
     Admin AdminDTOToAdmin(AdminDTO adminDTO);
     AdminDTO AdminToAdminDTO(Admin admin);
 }
