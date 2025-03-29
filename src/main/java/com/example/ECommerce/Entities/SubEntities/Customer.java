@@ -62,10 +62,6 @@ public class Customer extends User {
     @Nullable
     private List<String> orderIds = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Cart> carts = new HashSet<>();
-
-
     @ElementCollection
     @Nullable
     List<String> reviewIds = new ArrayList<>();

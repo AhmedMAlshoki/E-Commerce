@@ -3,6 +3,7 @@ package com.example.ECommerce.SecurityConfig.SecurityServices;
 import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,12 +13,14 @@ import org.springframework.stereotype.Service;
 import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
+
 @Service
 public class UserDetailsImp implements UserDetails {
     @Serial
     private static final long serialVersionUID = 1L;
 
 
+    @Getter
     private Long id;
     private String username;
     private Collection<? extends GrantedAuthority> role;
@@ -26,7 +29,7 @@ public class UserDetailsImp implements UserDetails {
 
     private Roles simpleRole;
     public UserDetailsImp(){}
-    public UserDetailsImp(String username,String password, Roles role) {
+    public UserDetailsImp(Long id,String username,String password, Roles role) {
         this.username = username;
         this.password = password;
         this.role = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
@@ -41,6 +44,7 @@ public class UserDetailsImp implements UserDetails {
     public static UserDetailsImp build(User user) {
 
         return new UserDetailsImp (
+                user.getId(),
                 user.getUsername(),
                 user.getPassword(),
                 user.getRole());
@@ -56,6 +60,9 @@ public class UserDetailsImp implements UserDetails {
         return username;
     }
 
+    public Roles getRole() {
+        return this.simpleRole;
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;

@@ -79,14 +79,4 @@ public class SupportService {
         return profilesMapper.supportToSupportProfileDTO(support);
     }
 
-
-    /*
-    * Get Support Profile
-    * SupportProfileDTO getTheProfile(Long id){
-    *     Support support = supportRepository.findById(id).orElseThrow();
-    *     return supportMapper.supportToSupportProfileDTO(support);
-    * }
-    * */
-
-
 }

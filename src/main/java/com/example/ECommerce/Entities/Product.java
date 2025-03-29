@@ -1,5 +1,6 @@
 package com.example.ECommerce.Entities;
 
+import com.example.ECommerce.Documents.Order;
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import com.example.ECommerce.Enums.Categories;
 import jakarta.persistence.*;

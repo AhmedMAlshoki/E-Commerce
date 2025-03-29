@@ -12,6 +12,7 @@ import com.example.ECommerce.Services.UserServices.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,7 +74,7 @@ public class OfferService {
     }
 
     public List<OfferDTO> getActiveOffers() {
-        Date date = new Date();
+        LocalDate date = new Date().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
         List<Offer> offers = offerRepository.findAllActiveOffers(date);
         return offers.stream().map(offerMapper::offerToOfferDTO).collect(Collectors.toList());
     }

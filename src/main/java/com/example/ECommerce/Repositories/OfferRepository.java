@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +46,7 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
     @EntityGraph(value = "offerWithProductAndSeller",type =  EntityGraph.EntityGraphType.FETCH)
     List<Offer> findByProductId(Long id);
 
-    Boolean isAnotherOfferActiveOnTheProduct(Long productId, Date startDate, Date endDate);
+    Boolean isAnotherOfferActiveOnTheProduct(Long productId, LocalDate startDate, LocalDate endDate);
 
-    List<Offer> findAllActiveOffers(Date currentDate);
+    List<Offer> findAllActiveOffers(LocalDate currentDate);
 }

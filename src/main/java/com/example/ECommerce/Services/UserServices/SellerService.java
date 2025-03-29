@@ -8,6 +8,7 @@ import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.ProfilesMapper;
 import com.example.ECommerce.Mappers.SellerMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.SellerRepository;
+import com.example.ECommerce.Services.AddressService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,9 +26,11 @@ public class SellerService  {
     private final CustomerService customerService;
     private final UserService userService;
     private final ProfilesMapper profilesMapper;
+    private final AddressService addressService ;
+
     @Autowired
     public SellerService(SellerRepository sellerRepository, SellerMapper sellerMapper,
-                          CustomerService customerService,
+                          CustomerService customerService, AddressService addressService,
                             UserService userService,ProfilesMapper profilesMapper)
     {
         this.sellerRepository = sellerRepository;
@@ -35,6 +38,7 @@ public class SellerService  {
         this.customerService = customerService;
         this.userService = userService;
         this.profilesMapper = profilesMapper;
+        this.addressService = addressService;
     }
     public SellerDTO getSeller(Long id) {
         return sellerMapper.sellerToSellerDTO(sellerRepository.findById(id).orElseThrow());
@@ -109,6 +113,7 @@ public class SellerService  {
                 // Create new Address
                 updatedAddress = objectMapper.treeToValue(addressNode, Address.class);
             }
+            addressService.updateAddress(updatedAddress);
             existingSeller.setPersonalAddress(updatedAddress);
             ((ObjectNode) jsonNode).remove("personalAddress");
             return jsonNode;
@@ -127,6 +132,7 @@ public class SellerService  {
                 // Create new Address
                 updatedAddress = objectMapper.treeToValue(addressNode, Address.class);
             }
+            addressService.updateAddress(updatedAddress);
             existingSeller.setShippingAddress(updatedAddress);
             ((ObjectNode) jsonNode).remove("shippingAddress");
             return jsonNode;

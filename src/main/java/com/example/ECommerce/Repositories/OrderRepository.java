@@ -1,7 +1,19 @@
 package com.example.ECommerce.Repositories;
 
 import com.example.ECommerce.Documents.Order;
+import com.example.ECommerce.Enums.STATUS;
 import org.springframework.data.mongodb.repository.MongoRepository;
-//https://www.mongodb.com/resources/products/compatibilities/spring-boot#update-using-mongotemplate
+import org.springframework.data.mongodb.repository.Query;
+
+import java.util.List;
+
 public interface OrderRepository extends MongoRepository<Order, String> {
+
+    List<Order> findByProductId(Long id);
+
+    List<Order> findByUserId(Long id);
+
+    @Query("{ '_id' : ?0 }, { '$set' : { 'status' : ?1 } }")
+    Order changeStatus(String id, STATUS status);
+
 }

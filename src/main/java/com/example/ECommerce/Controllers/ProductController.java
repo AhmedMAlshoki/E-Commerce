@@ -68,6 +68,7 @@ public class ProductController {
     @PostMapping("/product")
     public ResponseEntity<?> addProduct(@RequestBody ProductDTO productDTO) {
         try {
+            productService.addProduct(productDTO);
             return ResponseEntity.ok("Product has been added successfully");
         }
         catch (Exception e) {

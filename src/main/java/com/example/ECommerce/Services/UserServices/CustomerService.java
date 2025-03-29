@@ -10,6 +10,7 @@ import com.example.ECommerce.Mappers.CustomerMapper;
 import com.example.ECommerce.Mappers.ProfilesMapper;
 import com.example.ECommerce.Mappers.UserMapper;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.CustomerRepository;
+import com.example.ECommerce.Services.AddressService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,15 +31,17 @@ public class CustomerService {
     private final CustomerMapper customerMapper;
     private final PasswordEncoder passwordEncoder;
     private final ProfilesMapper profilesMapper ;
+    private final AddressService addressService ;
 
     @Autowired
     public CustomerService(CustomerRepository customerRepository, UserMapper userMapper, CustomerMapper customerMapper, PasswordEncoder passwordEncoder,
-                            ProfilesMapper profilesMapper) {
+                            ProfilesMapper profilesMapper, AddressService addressService) {
         this.customerRepository = customerRepository;
         this.userMapper = userMapper;
         this.customerMapper = customerMapper;
         this.passwordEncoder = passwordEncoder;
         this.profilesMapper = profilesMapper;
+        this.addressService = addressService;
     }
 
     public CustomerDTO registerCustomer(UserRegisterationDTO userRegisterationDTO) {
@@ -51,6 +54,10 @@ public class CustomerService {
 
     public Customer getCustomerToPromote(Long id) {
         return customerRepository.findById(id).orElseThrow();
+    }
+
+    public Customer getRawCustomer(Long id) {
+        return getCustomerToPromote(id);
     }
 
     public CustomerDTO getCustomer(Long id) {
@@ -72,6 +79,10 @@ public class CustomerService {
         return customerMapper.CustomertoCustomerDTO(theupdatedCustomer);
     }
 
+    public void updateCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
+
     private JsonNode handlingJsonPersonalAddress(JsonNode jsonNode,ObjectMapper objectMapper,Customer existingCustomer) throws IOException
     {
             JsonNode addressNode = jsonNode.get("personalAddress");
@@ -84,6 +95,7 @@ public class CustomerService {
                 // Create new Address
                 updatedAddress = objectMapper.treeToValue(addressNode, Address.class);
             }
+            addressService.updateAddress(updatedAddress);
             existingCustomer.setPersonalAddress(updatedAddress);
             ((ObjectNode) jsonNode).remove("personalAddress");
             return jsonNode;

@@ -46,6 +46,9 @@ public class ProductService {
         return productMapper.productToProductDTO(productRepository.findById(id).orElseThrow());
     }
 
+    public Product getRawProduct(Long id) {
+        return productRepository.findById(id).orElseThrow();
+    }
     public void deleteProduct(Long id) throws Exception {
         try {
             productRepository.deleteById(id);
@@ -88,6 +91,12 @@ public class ProductService {
         product.setOwner(sellerMapper.sellerDTOToSeller(seller));
         productRepository.save(product);
     }
+
+    public void updateProduct(Product product) {
+        productRepository.save(product);
+    }
+
+
 
     public void addProduct(ProductDTO productDTO) throws Exception {
         try {

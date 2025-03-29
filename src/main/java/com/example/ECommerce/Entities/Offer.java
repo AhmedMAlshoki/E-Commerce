@@ -3,9 +3,9 @@ package com.example.ECommerce.Entities;
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -37,8 +37,8 @@ public class Offer {
     @JoinColumn(name = "user_id")
     private Seller seller;
     private double discount=0.0;
-    private Date startDate = new Date(Date.from(new Date().toInstant()).getTime());
-    private Date endDate = new Date(Date.from(new Date().toInstant()).getTime() + 24 * 60 * 60 * 1000);
+    private LocalDate startDate = new Date().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+    private LocalDate endDate = startDate.plusMonths(1);
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
