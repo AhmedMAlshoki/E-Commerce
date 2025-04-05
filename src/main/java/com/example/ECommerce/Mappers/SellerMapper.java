@@ -13,6 +13,7 @@ public interface SellerMapper {
 
     @Mapping(source = "personalAddress", target = "personalAddress")
     @Mapping(source = "shippingAddress", target = "shippingAddress")
+    @Mapping(target = "id", ignore = false)
     SellerDTO sellerToSellerDTO(Seller seller);
 
     @Mapping(source = "personalAddress", target = "personalAddress")
@@ -21,7 +22,6 @@ public interface SellerMapper {
     @Mapping(target = "purchasedProducts", ignore = true)
     @Mapping(target = "wishListedProducts", ignore = true)
     @Mapping(target = "orderIds", ignore = true)
-    @Mapping(target = "carts", ignore = true)
     @Mapping(target = "reviewIds", ignore = true)
     @Mapping(target = "reports", ignore = true)
     @Mapping(target = "password", ignore = true)

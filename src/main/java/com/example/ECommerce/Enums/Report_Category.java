@@ -6,7 +6,6 @@ public enum Report_Category {
     SCAM_ORDER,
     SCAM_REVIEW,
     ILLEGAL_PRODUCT,
-    HARRASMENT,
     SPAM,
     OTHER;
 }

@@ -13,5 +13,6 @@ public interface PaymentMapper {
 
     @Mapping(target = "order", expression = "java(orderService.getOrder(payment.getOrder().getId()))")
     @Mapping(target = "cardHolderUser", source = "cardHolderUser")
+    @Mapping(target = "id", ignore = false)
     PaymentDTO paymentToPaymentDTO(Payment payment);
 }

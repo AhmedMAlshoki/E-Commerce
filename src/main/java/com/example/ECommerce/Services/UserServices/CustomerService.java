@@ -56,7 +56,11 @@ public class CustomerService {
         return customerRepository.findById(id).orElseThrow();
     }
 
-    public Customer getRawCustomer(Long id) {
+    public Customer getRawCustomer(Long id) throws Exception {
+        boolean exists = customerRepository.existsById(id);
+        if (!exists) {
+            throw new Exception("Customer not found");
+        }
         return getCustomerToPromote(id);
     }
 

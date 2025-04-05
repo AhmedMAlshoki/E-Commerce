@@ -17,6 +17,7 @@ public interface ProfilesMapper {
     @Mapping(target="personalAddress",source="personalAddress")
     @Mapping(target="wishListedProducts",source = "wishListedProducts")
     @Mapping(target="purchasedProducts",source = "purchasedProducts")
+    @Mapping(target = "id", ignore = false)
     CustomerProfileDTO customerToCustomerProfileDTO(Customer customer);
 
     @Mapping(target="shippingAddress",source="shippingAddress")
@@ -25,9 +26,12 @@ public interface ProfilesMapper {
     @Mapping(target="purchasedProducts",source = "purchasedProducts")
     @Mapping(target="ownedProducts",source = "ownedProducts")
     @Mapping(target="offers",source = "offers")
+    @Mapping(target = "id", ignore = false)
     SellerProfileDTO sellerToSellerProfileDTO(Seller seller);
 
+    @Mapping(target = "id", ignore = false)
     AdminProfileDTO adminToAdminProfileDTO(Admin admin);
 
+    @Mapping(target = "id", ignore = false)
     SupportProfileDTO supportToSupportProfileDTO(Support support);
 }

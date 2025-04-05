@@ -18,8 +18,8 @@ import java.util.Date;
 public class Review {
     @Id
     private String id;
-    private String userId;
-    private String productId;
+    private Long userId;
+    private Long productId;
     private int rating;
     private String comment;
 }

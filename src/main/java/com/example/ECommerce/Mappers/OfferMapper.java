@@ -14,5 +14,6 @@ public interface OfferMapper {
 
     @Mapping(target = "productId",source = "product.id")
     @Mapping(target = "sellerId", source = "seller.id")
+    @Mapping(target = "id", ignore = false)
     OfferDTO offerToOfferDTO(Offer offer);
 }

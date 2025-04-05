@@ -13,5 +13,6 @@ public interface OrderMapper {
     @Mapping(target = "shippingAddress", expression = "java(addressService.getAddress(order.getShippingAddress()))")
     @Mapping(target = "payment", expression = "java(paymentsService.getPayment(order.getPaymentId()))")
     @Mapping(target = "destinationAddress", expression = "java(addressService.getAddress(order.getDestinationAddress()))")
+    @Mapping(target = "id", ignore = false)
     OrderDTO orderToOrderDTO(Order order);
 }

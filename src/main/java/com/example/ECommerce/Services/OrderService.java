@@ -55,7 +55,7 @@ public class OrderService {
     }
 
     @Transactional
-    public ResponseEntity<?> addOrder(Long productId, int quantity) throws RuntimeException {
+    public ResponseEntity<?> addOrder(Long productId, int quantity) throws Exception {
         Product product = productService.getRawProduct(productId);
         Long userId = getUserId();
         Roles role = getRole();

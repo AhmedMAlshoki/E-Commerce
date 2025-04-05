@@ -1,9 +1,12 @@
 package com.example.ECommerce.Entities;
 
+import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Enums.Report_Category;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
 
 @Getter
 @Setter
@@ -16,10 +19,18 @@ public class Report {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    @CreatedBy
+    private Customer user;
+    @Nullable
+    @ManyToOne
+    private Product product;
+    @Nullable
+    @ManyToOne
+    private Customer reportedUser;
+    private String title;
     private String description;
     @Enumerated(EnumType.STRING)
     private Report_Category reportCategory;
-    Boolean isSolved;
+    boolean isSolved=false;
 
 }

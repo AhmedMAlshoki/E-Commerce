@@ -10,6 +10,7 @@ public interface SupportMapper {
 
 
     SupportDTO supportToSupportDTO(Support support);
+    @Mapping(target = "id", ignore = false)
     @Mapping(target = "reportsSolved",ignore = true)
     Support supportDTOToSupport(SupportDTO supportDTO);
 }

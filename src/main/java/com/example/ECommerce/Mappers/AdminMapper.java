@@ -8,5 +8,6 @@ import org.mapstruct.Mapping;
 public interface AdminMapper {
 
     Admin AdminDTOToAdmin(AdminDTO adminDTO);
+
     AdminDTO AdminToAdminDTO(Admin admin);
 }
