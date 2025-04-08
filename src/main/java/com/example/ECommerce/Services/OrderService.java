@@ -48,6 +48,13 @@ public class OrderService {
         return userDetails.getId();
     }
 
+    public boolean isOwner(String id)
+    {
+        Long user_id = getUserId();
+        Long owner_id = orderRepository.findById(id).orElseThrow().getUserId();
+        return user_id.equals(owner_id);
+    }
+
     private Roles getRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImp userDetails = (UserDetailsImp) authentication.getPrincipal();

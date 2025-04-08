@@ -10,8 +10,11 @@ import com.example.ECommerce.Enums.Categories;
 import com.example.ECommerce.Mappers.ProductMapper;
 import com.example.ECommerce.Mappers.SellerMapper;
 import com.example.ECommerce.Repositories.ProductRepository;
+import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -82,6 +85,13 @@ public class ProductService {
     public ProductProfileDTO getProductProfile(Long id) {
         Product product = productRepository.findProductByIdProfile(id);
         return productMapper.productToProductProfileDTO(product);
+    }
+
+    public boolean isOwner(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImp userDetails = (UserDetailsImp) authentication.getPrincipal();
+        Long userId = productRepository.findById(id).orElseThrow().getOwner().getId();
+        return userId.equals(userDetails.getId());
     }
 
     // After Finishing Seller Service

@@ -7,8 +7,11 @@ import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Enums.Report_Category;
 import com.example.ECommerce.Mappers.ReportMapper;
 import com.example.ECommerce.Repositories.ReportRepository;
+import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +59,13 @@ public class ReportService {
         }
         reportRepository.save(report);
         return reportMapper.reportToReportDTO(report);
+    }
+
+    public boolean isOwner(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImp userDetails = (UserDetailsImp) authentication.getPrincipal();
+        Long userId = reportRepository.findById(id).orElseThrow().getUser().getId();
+        return userId.equals(userDetails.getId());
     }
 
     public String updateReport(Long id, ReportDTO reportDTO) {

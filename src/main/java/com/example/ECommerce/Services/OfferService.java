@@ -8,8 +8,11 @@ import com.example.ECommerce.Mappers.OfferMapper;
 import com.example.ECommerce.Mappers.ProductMapper;
 import com.example.ECommerce.Mappers.SellerMapper;
 import com.example.ECommerce.Repositories.OfferRepository;
+import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -36,6 +39,13 @@ public class OfferService {
         this.offerMapper = offerMapper;
         this.productMapper = productMapper;
         this.sellerMapper = sellerMapper;
+    }
+
+    public boolean isOwner(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImp userDetails = (UserDetailsImp) authentication.getPrincipal();
+        Long userId = offerRepository.findById(id).orElseThrow().getSeller().getId();
+        return userId.equals(userDetails.getId());
     }
 
 

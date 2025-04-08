@@ -28,7 +28,7 @@ public class OfferController {
     }
 
     @PutMapping("/offer/{id}")
-    public ResponseEntity<?> updateOffer(@RequestBody OfferDTO offerDTO) {
+    public ResponseEntity<?> updateOffer(@PathVariable Long id,@RequestBody OfferDTO offerDTO) {
         try {
             offerService.updateOffer(offerDTO);
             return ResponseEntity.ok("Offer has been updated successfully");

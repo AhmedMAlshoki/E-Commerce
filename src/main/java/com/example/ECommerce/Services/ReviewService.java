@@ -4,6 +4,9 @@ import com.example.ECommerce.DTOs.ReviewDTO;
 import com.example.ECommerce.Documents.Review;
 import com.example.ECommerce.Mappers.ReviewMapper;
 import com.example.ECommerce.Repositories.ReviewRepository;
+import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,7 +53,13 @@ public class ReviewService {
 
     }
 
-
+    public boolean isOwner(String id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImp userDetails = (UserDetailsImp) authentication.getPrincipal();
+        Long user_id = userDetails.getId();
+        Long owner_id = reviewRepository.findById(id).orElseThrow().getUserId();
+        return user_id.equals(owner_id);
+    }
     public  List<ReviewDTO>getReviewsByProduct(Long productId) {
         List<Review> reviews = reviewRepository.findByProductId(productId);
         return reviews.stream().map(reviewMapper::reviewToReviewDTO).toList();
