@@ -5,6 +5,7 @@ package com.example.ECommerce.Controllers;
 import com.example.ECommerce.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class OrderController {
         this.orderService = orderService;
     }
     @PostMapping("/order/{product_id}")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<?> addOrder(Long product_id, @RequestParam int quantity) {
         try {
             return ResponseEntity.ok(orderService.addOrder(product_id, quantity));
@@ -28,6 +30,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
+    @PreAuthorize("hasRole('ROLE_SUPPORT')")
     public ResponseEntity<?> getAllOrders() {
         try {
             return ResponseEntity.ok(orderService.getAllOrders());
@@ -38,6 +41,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPPORT') or @ProductService.isOwner(#id)")
     public ResponseEntity<?> getAllOrdersPerProduct(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(orderService.getAllOrdersByProduct(id));
@@ -48,6 +52,7 @@ public class OrderController {
     }
 
     @GetMapping("/order/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPPORT') or @OrderService.isOwner(#id)")
     public ResponseEntity<?> getOrder(@PathVariable String id) {
         try {
             return ResponseEntity.ok(orderService.getOrder(id));
@@ -58,6 +63,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/order/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPPORT') or @OrderService.isOwner(#id)")
     public ResponseEntity<?> deleteOrder(@PathVariable String id) {
         try {
             orderService.deleteOrder(id);

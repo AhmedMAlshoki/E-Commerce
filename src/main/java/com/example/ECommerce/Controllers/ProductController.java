@@ -7,6 +7,7 @@ import com.example.ECommerce.Enums.Categories;
 import com.example.ECommerce.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +46,10 @@ public class ProductController {
         }
     }
 
+
+
     @DeleteMapping("/product/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPPORT') or @ProductService.isOwner(#id)")
     public ResponseEntity<?> deleteProduct(Long id) {
         try {
             productService.deleteProduct(id);
@@ -56,6 +60,7 @@ public class ProductController {
         }
     }
     @PutMapping("/product/{id}")
+    @PreAuthorize("@ProductService.isOwner(#id)")
     public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
         try {
             productService.updateProduct(productDTO);
@@ -66,6 +71,7 @@ public class ProductController {
         }
     }
     @PostMapping("/product")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<?> addProduct(@RequestBody ProductDTO productDTO) {
         try {
             productService.addProduct(productDTO);

@@ -5,6 +5,7 @@ import com.example.ECommerce.DTOs.ReportDTO;
 import com.example.ECommerce.Services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +20,7 @@ public class ReportController {
 
 
     @PostMapping("/report")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER') ")
     public ResponseEntity<?> addReport(@RequestBody ReportDTO reportDTO) {
         try {
             return ResponseEntity.ok(reportService.addReport(reportDTO));
@@ -29,6 +31,7 @@ public class ReportController {
     }
 
     @PutMapping("/report/{id}")
+    @PreAuthorize("@ReportService.isOwner(#id)")
     public ResponseEntity<?> updateReport(@PathVariable Long id, @RequestBody ReportDTO reportDTO) {
         try {
             return ResponseEntity.ok(reportService.updateReport(id, reportDTO));
@@ -39,6 +42,7 @@ public class ReportController {
     }
 
     @DeleteMapping("/report/{id}")
+    @PreAuthorize("@ReportService.isOwner(#id) or hasRole('ROLE_SUPPORT')")
     public ResponseEntity<?> deleteReport(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(reportService.deleteReport(id));
@@ -49,6 +53,7 @@ public class ReportController {
     }
 
     @GetMapping("/report/{id}")
+    @PreAuthorize("@ReportService.isOwner(#id) or hasRole('ROLE_SUPPORT')")
     public ResponseEntity<?> getReport(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(reportService.getReport(id));
@@ -59,6 +64,7 @@ public class ReportController {
     }
 
     @GetMapping("/reports/user/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPPORT')")
     public ResponseEntity<?> getReportsByUser(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(reportService.getReportsByUser(id));
@@ -69,6 +75,7 @@ public class ReportController {
     }
 
     @GetMapping("/reports/product/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPPORT') or @ProductService.isOwner(#id)")
     public ResponseEntity<?> getReportsByProduct(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(reportService.getReportsByProduct(id));
@@ -79,6 +86,7 @@ public class ReportController {
     }
 
     @GetMapping("/reports/forUser/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPPORT')")
     public ResponseEntity<?> getReportsForUser(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(reportService.getReportsOnUser(id));
@@ -89,6 +97,7 @@ public class ReportController {
     }
 
     @PutMapping("/report/resolve/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPPORT')")
     public ResponseEntity<?> resolveReport(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(reportService.resolveReport(id));

@@ -100,6 +100,7 @@ public class SecurityConfig {
                                                                               auth.requestMatchers("/api/v1/login").permitAll();
                                                                               auth.requestMatchers("/api/v1/hello").permitAll();
                                                                               auth.requestMatchers("/api/v1/register").permitAll();
+                                                                              auth.requestMatchers("/api/v1/products").permitAll();
                                                                               auth.anyRequest().authenticated();
                 }
                 );

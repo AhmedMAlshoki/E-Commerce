@@ -4,6 +4,7 @@ import com.example.ECommerce.DTOs.OfferDTO;
 import com.example.ECommerce.Services.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,7 @@ public class OfferController {
         this.offerService = offerService;
     }
     @PostMapping("/offer")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<?> addOffer(@RequestBody OfferDTO offerDTO) {
         try {
             offerService.addOffer(offerDTO);
@@ -28,6 +30,7 @@ public class OfferController {
     }
 
     @PutMapping("/offer/{id}")
+    @PreAuthorize("@OfferService.isOwner(#id)")
     public ResponseEntity<?> updateOffer(@PathVariable Long id,@RequestBody OfferDTO offerDTO) {
         try {
             offerService.updateOffer(offerDTO);
@@ -39,6 +42,7 @@ public class OfferController {
     }
 
     @DeleteMapping("/offer/{id}")
+    @PreAuthorize("@OfferService.isOwner(#id) or hasRole('ROLE_SUPPORT')")
     public ResponseEntity<?> deleteOffer(@PathVariable Long id) {
         try {
             offerService.deleteOffer(id);

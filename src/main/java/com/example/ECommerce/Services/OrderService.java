@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,6 +53,7 @@ public class OrderService {
     {
         Long user_id = getUserId();
         Long owner_id = orderRepository.findById(id).orElseThrow().getUserId();
+
         return user_id.equals(owner_id);
     }
 
@@ -120,6 +122,9 @@ public class OrderService {
     }
 
     public List<OrderDTO> getOrdersByUser(Long id) {
+        if (!id.equals(getUserId())) {
+            throw new RuntimeException("You are not authorized to view this information");
+        }
         List<Order> orders = orderRepository.findByUserId(id);
         return orders.stream().map(orderMapper::orderToOrderDTO).collect(Collectors.toList());
     }

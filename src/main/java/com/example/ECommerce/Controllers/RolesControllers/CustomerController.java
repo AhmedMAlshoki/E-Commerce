@@ -3,6 +3,7 @@ package com.example.ECommerce.Controllers.RolesControllers;
 import com.example.ECommerce.DTOs.RoleBasedDTO.CustomerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.example.ECommerce.Services.UserServices.CustomerService;
 @RestController
@@ -29,7 +30,8 @@ public class CustomerController {
     @Get customerByAddeess
     @Get Customer
     */
-     @GetMapping("customer/byBalance")
+    @GetMapping("customer/byBalance")
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_SELLER')")
     public ResponseEntity<?> getCustomersByBalanceGreaterThanOrEqual(@RequestParam double balance) {
         try {
             return ResponseEntity.ok(customerService.getCustomerWithBalanceGreaterThanOrEqual(balance));
@@ -39,6 +41,7 @@ public class CustomerController {
         }
     }
     @GetMapping("customer/byBalanceReverse")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SELLER')")
     public ResponseEntity<?> getCustomersByBalanceLowerThanOrEqual(@RequestParam double balance) {
         try {
             return ResponseEntity.ok(customerService.getCustomerWithBalanceLessThanOrEqual(balance));
@@ -49,6 +52,7 @@ public class CustomerController {
     }
 
     @GetMapping("customer/inBetweenBalance")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getCustomersByBalanceBetween(@RequestParam double minBalance, @RequestParam double maxBalance) {
         try {
             return ResponseEntity.ok(customerService.getCustomerWithBalanceBetween(minBalance, maxBalance));
@@ -59,6 +63,7 @@ public class CustomerController {
     }
 
     @GetMapping("customers")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SELLER')")
     public ResponseEntity<?> getAllCustomers() {
         try {
             return ResponseEntity.ok(customerService.getAllCustomers());

@@ -5,6 +5,7 @@ import com.example.ECommerce.DTOs.ReviewDTO;
 import com.example.ECommerce.Services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +20,7 @@ public class ReviewController {
 
 
     @PostMapping("/review")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<?> addReview(@RequestBody ReviewDTO reviewDTO) {
         try {
             return ResponseEntity.ok(reviewService.addReview(reviewDTO));
@@ -37,6 +39,7 @@ public class ReviewController {
     }
 
     @PutMapping("/review/{id}")
+    @PreAuthorize("@ReviewService.isOwner(#id)")
     public ResponseEntity<?> updateReview(@PathVariable String id, @RequestBody ReviewDTO reviewDTO) {
         try {
             return ResponseEntity.ok(reviewService.updateReview(id, reviewDTO));
@@ -46,6 +49,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/review/{id}")
+    @PreAuthorize("@ReviewService.isOwner(#id) or hasRole('ROLE_SUPPORT')")
     public ResponseEntity<?> deleteReview(@PathVariable String id) {
         try {
             return ResponseEntity.ok(reviewService.deleteReview(id));
