@@ -10,6 +10,7 @@ import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Repositories.*;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.CustomerRepository;
 import com.example.ECommerce.Repositories.RoleBasedRepositories.SellerRepository;
+import org.bson.types.ObjectId;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,7 +51,7 @@ public class AppStartUp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        clearData();
+        //clearData();
 
         // Create Addresses
         Address customer1Address = createAddress("15 Mohamed Mahmoud St", "Apt 5", "Cairo", "Cairo", Country.EGYPT, "11511");
@@ -462,6 +463,39 @@ public class AppStartUp implements CommandLineRunner {
         // Create Offers
 
 
+        createOffer(20.0, LocalDate.of(2025, 11, 25), LocalDate.of(2025, 11, 30), seller1, product2);  // US Black Friday - TV
+        createOffer(15.0, LocalDate.of(2025, 12, 15), LocalDate.of(2025, 12, 25), seller22, product97); // UK Christmas - Sunglasses
+        createOffer(25.0, LocalDate.of(2025, 4, 10), LocalDate.of(2025, 4, 15), seller8, product101);   // UAE Eid - Oud Candle
+        createOffer(30.0, LocalDate.of(2025, 11, 25), LocalDate.of(2025, 11, 30), seller26, product47); // Japan Black Friday - Smartwatch
+        createOffer(20.0, LocalDate.of(2025, 1, 21), LocalDate.of(2025, 2, 5), seller3, product13);    // China New Year - Cookbook
+        createOffer(15.0, LocalDate.of(2025, 9, 20), LocalDate.of(2025, 10, 5), seller23, product126); // Germany Oktoberfest - Car Tools
+        createOffer(25.0, LocalDate.of(2025, 7, 8), LocalDate.of(2025, 7, 15), seller17, product104);  // Albania Eid - Handmade Rug
+        createOffer(30.0, LocalDate.of(2025, 2, 9), LocalDate.of(2025, 2, 14), seller24, product36);   // France Valentine's Day - Makeup Kit
+        createOffer(20.0, LocalDate.of(2025, 5, 1), LocalDate.of(2025, 5, 7), seller12, product23);    // Poland Labor Day - Office Desk
+        createOffer(15.0, LocalDate.of(2025, 12, 26), LocalDate.of(2025, 1, 2), seller20, product21);  // Latvia Winter Sale - Sofa
+        createOffer(25.0, LocalDate.of(2025, 6, 12), LocalDate.of(2025, 6, 18), seller6, product8);    // Spain Summer Sale - Floral Dress
+        createOffer(30.0, LocalDate.of(2025, 9, 16), LocalDate.of(2025, 9, 19), seller13, product102); // Czech Auto Week - Car Kit
+        createOffer(20.0, LocalDate.of(2025, 8, 15), LocalDate.of(2025, 8, 22), seller27, product115); // Korea Liberation Day - Sneakers
+        createOffer(15.0, LocalDate.of(2025, 10, 3), LocalDate.of(2025, 10, 10), seller16, product18); // Serbia Tech Week - RC Car
+        createOffer(25.0, LocalDate.of(2025, 4, 23), LocalDate.of(2025, 4, 29), seller21, product66);  // US Earth Day - Electric Scooter
+        createOffer(30.0, LocalDate.of(2025, 7, 14), LocalDate.of(2025, 7, 21), seller24, product24);  // France Bastille Day - Bed Frame
+        createOffer(20.0, LocalDate.of(2025, 2, 12), LocalDate.of(2025, 2, 19), seller4, product14);   // UAE Shopping Festival - Story Book
+        createOffer(15.0, LocalDate.of(2025, 5, 5), LocalDate.of(2025, 5, 12), seller26, product52);   // Japan Golden Week - Action Camera
+        createOffer(25.0, LocalDate.of(2025, 3, 17), LocalDate.of(2025, 3, 24), seller25, product30);  // Canada St. Patrick's - Organic Honey
+        createOffer(30.0, LocalDate.of(2025, 11, 25), LocalDate.of(2025, 11, 30), seller2, product20); // NL Black Friday - Doll House
+        createOffer(20.0, LocalDate.of(2025, 10, 31), LocalDate.of(2025, 11, 4), seller1, product79);  // US Halloween - Gaming Headset
+        createOffer(15.0, LocalDate.of(2025, 8, 30), LocalDate.of(2025, 9, 6), seller19, product106);  // Ukraine Harvest Festival - Flour
+        createOffer(25.0, LocalDate.of(2025, 6, 1), LocalDate.of(2025, 6, 7), seller15, product15);    // Croatia Children's Day - Self-Help Book
+        createOffer(30.0, LocalDate.of(2025, 12, 1), LocalDate.of(2025, 12, 25), seller7, product35);  // Switzerland Advent - Luxury Perfume
+        createOffer(20.0, LocalDate.of(2025, 9, 27), LocalDate.of(2025, 10, 4), seller5, product44);   // Thailand Tech Fair - Card Game
+        createOffer(15.0, LocalDate.of(2025, 4, 22), LocalDate.of(2025, 4, 28), seller18, product105); // Kazakhstan Earth Day - Solar Panels
+        createOffer(25.0, LocalDate.of(2025, 2, 10), LocalDate.of(2025, 2, 17), seller9, product16);   // Pakistan Kashmir Day - Action Figure
+        createOffer(30.0, LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 7), seller10, product17);    // NZ New Year - Building Blocks
+        createOffer(20.0, LocalDate.of(2025, 3, 8), LocalDate.of(2025, 3, 15), seller14, product103);  // Romania Women's Day - Coffee Table
+        createOffer(15.0, LocalDate.of(2025, 5, 9), LocalDate.of(2025, 5, 15), seller28, product116);  // US Memorial Day - Security System
+
+        //creating orders
+
         // Link products to customer
 
 
@@ -531,17 +565,11 @@ public class AppStartUp implements CommandLineRunner {
         offer.setEndDate(end);
         offer.setSeller(seller);
         offer.setProduct(product);
+        seller.getOffers().add(offer);
         return offerRepository.save(offer);
     }
 
-    private Payment createPayment(Date date, Double amount, Customer customer) {
-        Payment payment = new Payment();
-        payment.setPaymentDate(date);
-        payment.setAmount(amount);
-        payment.setCardHolderUser(customer);
-        payment.setOrder("ORDER-123"); // Placeholder
-        return paymentRepository.save(payment);
-    }
+
 
     private Report createReport(Customer user, Product product, String desc, Report_Category category) {
         Report report = new Report();

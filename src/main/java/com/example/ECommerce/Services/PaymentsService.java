@@ -1,7 +1,9 @@
 package com.example.ECommerce.Services;
 
+import com.example.ECommerce.DTOs.OfferDTO;
 import com.example.ECommerce.DTOs.PaymentDTO;
 import com.example.ECommerce.DTOs.ProductDTO;
+import com.example.ECommerce.Entities.Offer;
 import com.example.ECommerce.Entities.Payment;
 import com.example.ECommerce.Entities.Product;
 import com.example.ECommerce.Entities.SubEntities.Customer;
@@ -18,17 +20,23 @@ public class PaymentsService {
     private final CustomerService customerService;
     private final PaymentRepository paymentRepository;
     private final PaymentMapper paymentMapper;
+    private final OfferService offerService;
 
     @Autowired
-    public PaymentsService(CustomerService customerService, PaymentRepository paymentRepository, PaymentMapper paymentMapper) {
+    public PaymentsService(CustomerService customerService, PaymentRepository paymentRepository, PaymentMapper paymentMapper, OfferService offerService) {
         this.customerService = customerService;
         this.paymentRepository = paymentRepository;
         this.paymentMapper = paymentMapper;
+        this.offerService = offerService;
     }
 
     @Transactional
     public Payment createPayment(Product product, Customer customer, int quantity,String orderID) throws RuntimeException {
         double totalCost = product.getPrice() * quantity;
+        if (product.getOffer() != null) {
+            OfferDTO offer = offerService.findOffer(product.getOffer().getId());
+            totalCost = (offer.discount()/100) * totalCost;
+        }
         if (customer.getBalance() < totalCost) {
             throw new RuntimeException("Not enough balance to make the payment");
         }

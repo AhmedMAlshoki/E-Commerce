@@ -131,12 +131,14 @@ public class OrderService {
 
 
     @Transactional
-    public OrderDTO changeStatus(String id, STATUS status) {
+    public OrderDTO changeStatus(String id, STATUS status) throws Exception {
         if (status.equals(STATUS.CANCELLED)) {
             paymentsService.cancelPayment(id);
             int quantity = orderRepository.findById(id).orElseThrow().getQuantity();
             Product product = productService.getRawProduct(orderRepository.findById(id).orElseThrow().getProductId());
             product.setQuantity(product.getQuantity() + quantity);
+            Customer customer = customerService.getRawCustomer(orderRepository.findById(id).orElseThrow().getUserId());
+            customer.getPurchasedProducts().remove(product);
             productService.updateProduct(product);
         }
         Order order = orderRepository.changeStatus(id, status);
