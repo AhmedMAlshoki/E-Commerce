@@ -1,15 +1,13 @@
-package com.example.ECommerce.Repositories;
+package com.example.ECommerce.Repositories.JPA.RoleBasedRepositories;
 
 import com.example.ECommerce.Entities.Offer;
 import org.hibernate.annotations.NamedQuery;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

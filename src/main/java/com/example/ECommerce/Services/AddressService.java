@@ -3,7 +3,7 @@ package com.example.ECommerce.Services;
 import com.example.ECommerce.DTOs.AddressDTO;
 import com.example.ECommerce.Entities.Address;
 import com.example.ECommerce.Mappers.AddressMapper;
-import com.example.ECommerce.Repositories.AddressRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

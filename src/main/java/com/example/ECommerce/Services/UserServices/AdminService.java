@@ -1,17 +1,13 @@
 package com.example.ECommerce.Services.UserServices;
 
 import com.example.ECommerce.DTOs.RoleBasedDTO.AdminDTO;
-import com.example.ECommerce.DTOs.RoleBasedDTO.SupportDTO;
-import com.example.ECommerce.DTOs.RoleBasedDTO.UserDTO;
 import com.example.ECommerce.DTOs.RoleBasedDTO.UserProfileDTO;
 import com.example.ECommerce.Entities.SubEntities.Admin;
 import com.example.ECommerce.Entities.SubEntities.Support;
-import com.example.ECommerce.Entities.User;
 import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.AdminMapper;
-import com.example.ECommerce.Mappers.ProductMapper;
 import com.example.ECommerce.Mappers.ProfilesMapper;
-import com.example.ECommerce.Repositories.RoleBasedRepositories.AdminRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.AdminRepository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

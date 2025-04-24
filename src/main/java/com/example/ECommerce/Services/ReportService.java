@@ -6,7 +6,7 @@ import com.example.ECommerce.Entities.Report;
 import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Enums.Report_Category;
 import com.example.ECommerce.Mappers.ReportMapper;
-import com.example.ECommerce.Repositories.ReportRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.ReportRepository;
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

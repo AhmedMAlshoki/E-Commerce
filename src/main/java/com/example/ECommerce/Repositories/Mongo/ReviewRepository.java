@@ -1,4 +1,4 @@
-package com.example.ECommerce.Repositories;
+package com.example.ECommerce.Repositories.Mongo;
 
 import com.example.ECommerce.Documents.Review;
 import org.springframework.data.mongodb.repository.MongoRepository;

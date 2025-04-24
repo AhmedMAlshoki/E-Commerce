@@ -27,7 +27,6 @@ public class Payment {
     @Column(name = "payment_date", nullable = false, updatable = false)
     private Date paymentDate;
     @Column(name = "order",unique = true,nullable = false)
-    @Enumerated(EnumType.STRING)
     private String order;
     @CreatedBy
     @ManyToOne(fetch = FetchType.EAGER)

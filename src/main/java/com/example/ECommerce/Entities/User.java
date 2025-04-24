@@ -21,18 +21,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    protected Long id;
     @Setter
     @Getter
-    private String username;
-    private String email;
-    private String password;
+    protected String username;
+    protected String email;
+    protected String password;
     @Nullable
-    private String phoneNumber;
+    protected String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    private Roles role;
+    protected Roles role;
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    protected Date createdAt;
 }

@@ -7,7 +7,7 @@ import com.example.ECommerce.Entities.SubEntities.Seller;
 import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.ProfilesMapper;
 import com.example.ECommerce.Mappers.SellerMapper;
-import com.example.ECommerce.Repositories.RoleBasedRepositories.SellerRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.SellerRepository;
 import com.example.ECommerce.Services.AddressService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -44,6 +44,10 @@ public class SellerService  {
         return sellerMapper.sellerToSellerDTO(sellerRepository.findById(id).orElseThrow());
     }
 
+    public Seller  getSellerEntity(Long id) {
+        return sellerRepository.findById(id).orElseThrow();
+    }
+
     public void deleteSeller(Long id) {
         sellerRepository.deleteById(id);
     }
@@ -62,7 +66,6 @@ public class SellerService  {
         seller.setRole(Roles.SELLER);
         seller.setBusinessName(customer.getUsername());
         seller.setAmountSaved(customer.getAmountSaved());
-        seller.setCarts(customer.getCarts());
         seller.setCreatedAt(customer.getCreatedAt());
         seller.setOrderIds(customer.getOrderIds());
         seller.setPurchasedProducts(customer.getPurchasedProducts());

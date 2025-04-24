@@ -1,4 +1,4 @@
-package com.example.ECommerce.Repositories;
+package com.example.ECommerce.Repositories.JPA.RoleBasedRepositories;
 
 import com.example.ECommerce.Entities.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long> {

@@ -2,13 +2,11 @@ package com.example.ECommerce.Services;
 
 import com.example.ECommerce.DTOs.OfferDTO;
 import com.example.ECommerce.DTOs.PaymentDTO;
-import com.example.ECommerce.DTOs.ProductDTO;
-import com.example.ECommerce.Entities.Offer;
 import com.example.ECommerce.Entities.Payment;
 import com.example.ECommerce.Entities.Product;
 import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Mappers.PaymentMapper;
-import com.example.ECommerce.Repositories.PaymentRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.PaymentRepository;
 import com.example.ECommerce.Services.UserServices.CustomerService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

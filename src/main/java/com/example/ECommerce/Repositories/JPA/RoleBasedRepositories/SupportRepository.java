@@ -1,8 +1,7 @@
-package com.example.ECommerce.Repositories.RoleBasedRepositories;
+package com.example.ECommerce.Repositories.JPA.RoleBasedRepositories;
 
 import com.example.ECommerce.Entities.SubEntities.Support;
 import org.hibernate.annotations.NamedQuery;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;

@@ -9,7 +9,7 @@ import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Mappers.ProfilesMapper;
 import com.example.ECommerce.Mappers.SupportMapper;
 import com.example.ECommerce.Mappers.UserMapper;
-import com.example.ECommerce.Repositories.RoleBasedRepositories.SupportRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.SupportRepository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

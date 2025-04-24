@@ -1,4 +1,4 @@
-package com.example.ECommerce.Repositories.RoleBasedRepositories;
+package com.example.ECommerce.Repositories.JPA.RoleBasedRepositories;
 
 import com.example.ECommerce.Entities.SubEntities.Seller;
 import com.example.ECommerce.Enums.Categories;

@@ -1,7 +1,7 @@
 package com.example.ECommerce.SecurityConfig.SecurityServices;
 
 import com.example.ECommerce.Entities.User;
-import com.example.ECommerce.Repositories.UserRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

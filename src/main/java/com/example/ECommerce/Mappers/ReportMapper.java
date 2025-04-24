@@ -18,6 +18,6 @@ public interface ReportMapper {
     @Mapping(target = "user", source = "user")
     @Mapping(target = "product", source = "product")
     @Mapping(target = "reportedUser", source = "reportedUser")
-    @Mapping(target = "reportCategory", source = "reportCategory.value")
+    @Mapping(target = "reportCategory", source = "reportCategory")
     Report reportDTOToReport(ReportDTO reportDTO);
 }

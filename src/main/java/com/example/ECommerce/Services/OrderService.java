@@ -9,8 +9,7 @@ import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Enums.STATUS;
 import com.example.ECommerce.Mappers.OrderMapper;
-import com.example.ECommerce.Repositories.OrderRepository;
-import com.example.ECommerce.Repositories.ProductRepository;
+import com.example.ECommerce.Repositories.Mongo.OrderRepository;
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.CustomerService;
 import org.bson.types.ObjectId;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service

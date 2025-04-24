@@ -9,7 +9,7 @@ import com.example.ECommerce.Entities.SubEntities.Seller;
 import com.example.ECommerce.Enums.Categories;
 import com.example.ECommerce.Mappers.ProductMapper;
 import com.example.ECommerce.Mappers.SellerMapper;
-import com.example.ECommerce.Repositories.ProductRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.ProductRepository;
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;

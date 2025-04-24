@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-@NamedEntityGraph(name = "support-entity-graph", attributeNodes = @NamedAttributeNode("reportsSolved"))
 @Getter
 @Setter
 @Entity

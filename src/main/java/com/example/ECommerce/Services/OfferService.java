@@ -7,7 +7,7 @@ import com.example.ECommerce.Entities.Offer;
 import com.example.ECommerce.Mappers.OfferMapper;
 import com.example.ECommerce.Mappers.ProductMapper;
 import com.example.ECommerce.Mappers.SellerMapper;
-import com.example.ECommerce.Repositories.OfferRepository;
+import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.OfferRepository;
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;

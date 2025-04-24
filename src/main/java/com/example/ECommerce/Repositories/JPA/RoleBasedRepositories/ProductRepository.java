@@ -1,10 +1,7 @@
-package com.example.ECommerce.Repositories;
+package com.example.ECommerce.Repositories.JPA.RoleBasedRepositories;
 
 import com.example.ECommerce.Entities.Product;
-import com.example.ECommerce.Entities.SubEntities.Customer;
 import com.example.ECommerce.Enums.Categories;
-import jakarta.persistence.NamedAttributeNode;
-import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.NamedQuery;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

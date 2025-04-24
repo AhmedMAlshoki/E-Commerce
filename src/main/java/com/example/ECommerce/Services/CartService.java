@@ -3,7 +3,7 @@ package com.example.ECommerce.Services;
 import com.example.ECommerce.DTOs.CartDTO;
 import com.example.ECommerce.Mappers.CartMapper;
 import com.example.ECommerce.RedisHash.Cart;
-import com.example.ECommerce.Repositories.CartRepository;
+import com.example.ECommerce.Repositories.Redis.CartRepository;
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;

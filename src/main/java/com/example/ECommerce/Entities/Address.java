@@ -13,7 +13,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @Setter
 @Entity
-@OnDelete(action = OnDeleteAction.CASCADE)
 @Table(name = "address")
 public class Address {
     @Id

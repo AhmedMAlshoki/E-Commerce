@@ -1,4 +1,4 @@
-package com.example.ECommerce.Repositories.RoleBasedRepositories;
+package com.example.ECommerce.Repositories.JPA.RoleBasedRepositories;
 
 import com.example.ECommerce.Entities.SubEntities.Customer;
 import org.hibernate.annotations.NamedQuery;

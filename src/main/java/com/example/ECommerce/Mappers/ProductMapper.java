@@ -5,43 +5,49 @@ import com.example.ECommerce.DTOs.ProductProfileDTO;
 import com.example.ECommerce.Entities.Product;
 import com.example.ECommerce.Enums.Categories;
 
+import com.example.ECommerce.Services.UserServices.SellerService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 
 @Mapper(componentModel = "spring", uses = {SellerMapper.class
                                            , OfferMapper.class
 })
-public interface ProductMapper {
+@ComponentScan("com.example.ECommerce.*")
+public abstract class ProductMapper {
 
     //SellerServices to get seller id
 
-    @Mapping(source = "owner", target = "seller")
-    @Mapping(target = "category", source= "category.name")
-    @Mapping(target = "seller",source = "owner.id")
+    @Autowired
+    protected SellerService sellerService;
+
+    @Mapping(source = "owner.id", target = "seller")
+    @Mapping(target = "category", source= "category")
     @Mapping(target = "id", ignore = false)
-    ProductDTO productToProductDTO(Product product);
+    public abstract ProductDTO  productToProductDTO(Product product);
+
 
 
     @Mapping(target = "reviewIds", ignore = true)
     @Mapping(target = "offer", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(source = "seller", target = "owner")
+    @Mapping(target = "owner",  expression = "java(sellerService.getSellerEntity(productDTO.seller()))")
     @Mapping(source = "category", target= "category")
-    @Mapping(target = "owner",ignore = true)
-    Product productDTOToProduct(ProductDTO productDTO);
+    public abstract Product productDTOToProduct(ProductDTO productDTO);
 
     @Mapping(source = "offer", target = "offer")
     @Mapping(target = "category", source= "category")
     @Mapping(target = "seller",source = "owner")
-    ProductProfileDTO productToProductProfileDTO(Product product);
+    public abstract ProductProfileDTO productToProductProfileDTO(Product product);
 
-    default Categories mapStringToCategory(String category) {
+    Categories mapStringToCategory(String category) {
         return Categories.valueOf(category.toUpperCase()); // Case-insensitive
     }
 
     // Custom logic to convert Categories enum to String
-    default String mapCategoryToString(Categories category) {
+    String mapCategoryToString(Categories category) {
         return category.name();
     }
 

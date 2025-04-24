@@ -3,7 +3,7 @@ package com.example.ECommerce.Services;
 import com.example.ECommerce.DTOs.ReviewDTO;
 import com.example.ECommerce.Documents.Review;
 import com.example.ECommerce.Mappers.ReviewMapper;
-import com.example.ECommerce.Repositories.ReviewRepository;
+import com.example.ECommerce.Repositories.Mongo.ReviewRepository;
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
