@@ -8,6 +8,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.lang.NonNull;
 
 import java.util.Date;
@@ -17,7 +18,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "payment")
+@Table(name = "paymenta")
+@EntityListeners(AuditingEntityListener.class)
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,7 +28,7 @@ public class Payment {
     @CreatedDate
     @Column(name = "payment_date", nullable = false, updatable = false)
     private Date paymentDate;
-    @Column(name = "order",unique = true,nullable = false)
+    @Column(name = "order_id",unique = true,nullable = false)
     private String order;
     @CreatedBy
     @ManyToOne(fetch = FetchType.EAGER)

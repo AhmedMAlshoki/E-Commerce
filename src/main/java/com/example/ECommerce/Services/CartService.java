@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class CartService {
     private final OrderService orderService;
 
     @Autowired
-    public CartService(CartRepository cartRepository,CartMapper cartMapper,OrderService orderService)
+    public CartService(CartRepository cartRepository, @Lazy CartMapper cartMapper, OrderService orderService)
     {
         this.cartMapper= cartMapper;
         this.cartRepository= cartRepository;

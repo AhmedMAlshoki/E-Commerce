@@ -8,6 +8,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.*;
 
@@ -16,13 +17,14 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 //@NamedEntityGraph(name = "ProductOwner", attributeNodes = @NamedAttributeNode("owner"))
 //@NamedEntityGraph(name = "ProductOffer", attributeNodes = @NamedAttributeNode("offer"))
 @NamedEntityGraphs({
     @NamedEntityGraph(name = "ProductOwner", attributeNodes = {@NamedAttributeNode("owner")}),
     @NamedEntityGraph(name = "ProductOfferAndOwner", attributeNodes = {@NamedAttributeNode("offer"), @NamedAttributeNode("owner")})
 })
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

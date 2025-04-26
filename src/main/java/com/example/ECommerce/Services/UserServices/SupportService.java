@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,8 @@ public class SupportService {
     private final PasswordEncoder passwordEncoder;
     private final ProfilesMapper profilesMapper;
     @Autowired
-    public SupportService(SupportRepository supportRepository , UserMapper userMapper,
-                          SupportMapper supportMapper, PasswordEncoder passwordEncoder, ProfilesMapper profilesMapper) {
+    public SupportService(SupportRepository supportRepository ,@Lazy UserMapper userMapper,
+                          @Lazy SupportMapper supportMapper, PasswordEncoder passwordEncoder,@Lazy ProfilesMapper profilesMapper) {
         this.supportRepository = supportRepository;
         this.userMapper = userMapper;
         this.supportMapper = supportMapper;

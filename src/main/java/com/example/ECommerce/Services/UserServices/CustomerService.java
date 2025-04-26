@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +35,8 @@ public class CustomerService {
     private final AddressService addressService ;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, UserMapper userMapper, CustomerMapper customerMapper, PasswordEncoder passwordEncoder,
-                            ProfilesMapper profilesMapper, AddressService addressService) {
+    public CustomerService(CustomerRepository customerRepository,@Lazy UserMapper userMapper,@Lazy CustomerMapper customerMapper, PasswordEncoder passwordEncoder,
+                           @Lazy ProfilesMapper profilesMapper, AddressService addressService) {
         this.customerRepository = customerRepository;
         this.userMapper = userMapper;
         this.customerMapper = customerMapper;

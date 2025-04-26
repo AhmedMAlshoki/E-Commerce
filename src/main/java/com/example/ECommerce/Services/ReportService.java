@@ -10,6 +10,7 @@ import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.ReportReposi
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ReportService {
     private final ProductService productService;
 
     @Autowired
-    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper
+    public ReportService(ReportRepository reportRepository,@Lazy ReportMapper reportMapper
             , CustomerService customerService, ProductService productService) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;

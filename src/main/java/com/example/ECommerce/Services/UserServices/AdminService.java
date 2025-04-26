@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class AdminService{
     private final ProfilesMapper profilesMapper;
     @Autowired
     public AdminService(AdminRepository adminRepository , AdminMapper adminMapper,
-                        SupportService supportService, ProfilesMapper profilesMapper) {
+                        SupportService supportService,@Lazy ProfilesMapper profilesMapper) {
         this.adminMapper = adminMapper;
         this.adminRepository = adminRepository;
         this.supportService = supportService;

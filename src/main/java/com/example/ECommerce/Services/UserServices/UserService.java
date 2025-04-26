@@ -8,6 +8,7 @@ import com.example.ECommerce.Enums.Roles;
 import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.UserRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public class UserService {
     private final AdminService adminService;
     private final SellerService sellerService;
     @Autowired
-    public UserService(UserRepository userRepository, CustomerService customerService , SupportService supportService,
-                       AdminService adminService , SellerService sellerService) {
+    public UserService(UserRepository userRepository, @Lazy CustomerService customerService ,@Lazy SupportService supportService,
+                       @Lazy AdminService adminService ,@Lazy SellerService sellerService) {
         this.userRepository = userRepository;
         this.customerService = customerService;
         this.supportService = supportService;

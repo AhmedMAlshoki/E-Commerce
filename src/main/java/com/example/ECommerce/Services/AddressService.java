@@ -5,6 +5,7 @@ import com.example.ECommerce.Entities.Address;
 import com.example.ECommerce.Mappers.AddressMapper;
 import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +13,7 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
     @Autowired
-    public AddressService(AddressRepository addressRepository,AddressMapper addressMapper) {
+    public AddressService(AddressRepository addressRepository,@Lazy AddressMapper addressMapper) {
         this.addressMapper = addressMapper;
         this.addressRepository = addressRepository;
     }

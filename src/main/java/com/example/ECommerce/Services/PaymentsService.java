@@ -10,9 +10,12 @@ import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.PaymentRepos
 import com.example.ECommerce.Services.UserServices.CustomerService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PaymentsService {
 
     private final CustomerService customerService;
@@ -21,7 +24,7 @@ public class PaymentsService {
     private final OfferService offerService;
 
     @Autowired
-    public PaymentsService(CustomerService customerService, PaymentRepository paymentRepository, PaymentMapper paymentMapper, OfferService offerService) {
+    public PaymentsService(CustomerService customerService, PaymentRepository paymentRepository, @Lazy PaymentMapper paymentMapper, OfferService offerService) {
         this.customerService = customerService;
         this.paymentRepository = paymentRepository;
         this.paymentMapper = paymentMapper;

@@ -22,6 +22,8 @@ public abstract class ProductMapper {
     @Autowired
     protected SellerService sellerService;
 
+
+
     @Mapping(source = "owner.id", target = "seller")
     @Mapping(target = "category", source= "category")
     @Mapping(target = "id", ignore = false)

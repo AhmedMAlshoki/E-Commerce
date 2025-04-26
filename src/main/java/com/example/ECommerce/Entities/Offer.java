@@ -4,6 +4,7 @@ import com.example.ECommerce.Entities.SubEntities.Seller;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "offer")
+@Table(name = "offers")
 @NamedEntityGraphs({
     @NamedEntityGraph(name = "offerWithSeller", attributeNodes = {
         @NamedAttributeNode("seller")
@@ -27,6 +28,7 @@ import java.util.Date;
         })
 
 })
+@EntityListeners(AuditingEntityListener.class)
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

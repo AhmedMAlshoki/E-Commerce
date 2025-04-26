@@ -6,7 +6,9 @@ import com.example.ECommerce.Entities.Offer;
 import com.example.ECommerce.Entities.Product;
 import com.example.ECommerce.Entities.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -32,6 +34,7 @@ import java.util.List;
                                                                                @NamedAttributeNode("ownedProducts")})
         }
 )
+@AllArgsConstructor
 public class Seller extends Customer {
     private String businessName;
     private String taxId;
@@ -43,4 +46,11 @@ public class Seller extends Customer {
     private List<Offer> offers;// List of offers made by the seller <Offer>
 
 
+    public Seller() {
+        super();
+        List<Product> ownedProducts = new ArrayList<>();
+        List<Offer> offers = new ArrayList<>();
+        this.ownedProducts = ownedProducts;
+        this.offers = offers;
+    }
 }

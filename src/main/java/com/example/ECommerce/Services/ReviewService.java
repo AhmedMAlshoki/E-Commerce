@@ -5,6 +5,7 @@ import com.example.ECommerce.Documents.Review;
 import com.example.ECommerce.Mappers.ReviewMapper;
 import com.example.ECommerce.Repositories.Mongo.ReviewRepository;
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ReviewMapper reviewMapper;
 
-    public ReviewService(ReviewRepository reviewRepository, ReviewMapper reviewMapper) {
+    public ReviewService(ReviewRepository reviewRepository,@Lazy ReviewMapper reviewMapper) {
         this.reviewRepository = reviewRepository;
         this.reviewMapper = reviewMapper;
     }

@@ -14,6 +14,7 @@ import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.CustomerService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,8 +33,8 @@ public class OrderService {
     private final OrderMapper orderMapper;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, PaymentsService paymentsService,
-                        CustomerService customerService, OrderMapper orderMapper,
+    public OrderService(OrderRepository orderRepository,@Lazy PaymentsService paymentsService,
+                        CustomerService customerService,@Lazy OrderMapper orderMapper,
                         ProductService productService) {
         this.orderRepository = orderRepository;
         this.paymentsService = paymentsService;

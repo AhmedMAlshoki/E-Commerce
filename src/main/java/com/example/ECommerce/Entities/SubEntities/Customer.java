@@ -4,9 +4,7 @@ import com.example.ECommerce.Documents.Review;
 import com.example.ECommerce.Entities.*;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -32,6 +30,7 @@ import java.util.Set;
 
         }
 )
+@AllArgsConstructor
 public class Customer extends User {
     @Nullable
     @OneToOne
@@ -69,4 +68,18 @@ public class Customer extends User {
 
     @OneToMany(fetch = FetchType.LAZY)
     List<Report> reports = new ArrayList<>();
+
+    public Customer() {
+        super();
+        Set<Product> purchasedProducts = new HashSet<>();
+        Set<Product> wishListedProducts = new HashSet<>();
+        List<String> orderIds = new ArrayList<>();
+        List<String> reviewIds = new ArrayList<>();
+        List<Report> reports = new ArrayList<>();
+        this.purchasedProducts = purchasedProducts;
+        this.wishListedProducts = wishListedProducts;
+        this.orderIds = orderIds;
+        this.reviewIds = reviewIds;
+        this.reports = reports;
+    }
 }

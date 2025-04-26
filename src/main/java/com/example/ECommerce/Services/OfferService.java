@@ -11,6 +11,7 @@ import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.OfferReposit
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,8 @@ public class OfferService {
 
     @Autowired
     public OfferService(OfferRepository offerRepository, ProductService productService,
-                        SellerService sellerService, OfferMapper offerMapper,
-                        ProductMapper productMapper, SellerMapper sellerMapper) {
+                        SellerService sellerService,@Lazy OfferMapper offerMapper,
+                        @Lazy ProductMapper productMapper,@Lazy SellerMapper sellerMapper) {
         this.offerRepository = offerRepository;
         this.productService = productService;
         this.sellerService = sellerService;

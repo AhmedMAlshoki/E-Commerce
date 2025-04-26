@@ -92,7 +92,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/seller/{id}}/products")
+    @GetMapping("/seller/{id}/products")
     public ResponseEntity<?> getUserProducts(@PathVariable Long id) {
         try {
             List<ProductDTO> products = productService.getProductsBySeller(id);

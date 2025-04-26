@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     LinkedList<User> findByRole(Roles role);
 
     //save new user
-    User save(UserRegisterationDTO user);
+    //User save(UserRegisterationDTO user);
 
     void deleteByUsername(String username);
 

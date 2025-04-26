@@ -13,6 +13,7 @@ import com.example.ECommerce.Repositories.JPA.RoleBasedRepositories.ProductRepos
 import com.example.ECommerce.SecurityConfig.SecurityServices.UserDetailsImp;
 import com.example.ECommerce.Services.UserServices.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class ProductService {
     private final SellerService sellerService;
     private final SellerMapper sellerMapper;
     @Autowired
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper,
-                           SellerService sellerService, SellerMapper sellerMapper) {
+    public ProductService(ProductRepository productRepository,@Lazy ProductMapper productMapper,
+                           SellerService sellerService,@Lazy SellerMapper sellerMapper) {
         this.productMapper = productMapper;
         this.productRepository = productRepository;
         this.sellerService = sellerService;

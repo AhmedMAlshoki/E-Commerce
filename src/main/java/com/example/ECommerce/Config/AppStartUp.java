@@ -13,9 +13,12 @@ import com.example.ECommerce.Repositories.Mongo.ReviewRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+
+@Component
 public class AppStartUp implements CommandLineRunner {
     private final UserRepository userRepository;
     private final CustomerRepository customerRepository;

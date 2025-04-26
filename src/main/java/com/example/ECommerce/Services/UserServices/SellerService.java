@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -29,9 +30,9 @@ public class SellerService  {
     private final AddressService addressService ;
 
     @Autowired
-    public SellerService(SellerRepository sellerRepository, SellerMapper sellerMapper,
+    public SellerService(SellerRepository sellerRepository,@Lazy SellerMapper sellerMapper,
                           CustomerService customerService, AddressService addressService,
-                            UserService userService,ProfilesMapper profilesMapper)
+                            UserService userService,@Lazy ProfilesMapper profilesMapper)
     {
         this.sellerRepository = sellerRepository;
         this.sellerMapper = sellerMapper;

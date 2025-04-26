@@ -7,11 +7,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "report")
+@EntityListeners(AuditingEntityListener.class)
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
