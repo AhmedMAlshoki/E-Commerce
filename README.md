@@ -162,9 +162,56 @@ This project is a comprehensive E-Commerce platform built with Spring Boot 3.4 a
 - **MongoDB 6+** - [Download here](https://www.mongodb.com/try/download/community)
 - **Redis 7+** - [Download here](https://redis.io/download)
 
-### 🐳 Docker Setup (Coming Soon)
+### 🐳 Docker Setup
 
-> **Note:** Docker Compose configuration is planned for future releases to simplify the setup process.
+> **Note:** Docker Compose configuration is now available for easy setup and deployment.
+
+#### Quick Start with Docker
+
+**Prerequisites:**
+- Docker Desktop installed
+- Docker Compose installed
+
+**One-command setup:**
+```bash
+# Clone and run
+git clone https://github.com/yourusername/E-Commerce.git
+cd E-Commerce
+docker-compose up -d
+```
+
+**What this does:**
+- Builds your Spring Boot application
+- Starts PostgreSQL database
+- Starts MongoDB database  
+- Starts Redis cache
+- Sets up networking between all services
+- Waits for databases to be healthy before starting the app
+
+**Access the application:**
+- **API**: http://localhost:8080
+- **Health Check**: http://localhost:8080/api/v1/hello
+- **PostgreSQL**: localhost:5432
+- **MongoDB**: localhost:27017
+- **Redis**: localhost:6379
+
+**Useful commands:**
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f app
+
+# Stop all services
+docker-compose down
+
+# Stop and remove volumes (clean slate)
+docker-compose down -v
+
+# Rebuild application
+docker-compose up -d --build app
+```
 
 ### Manual Setup
 
