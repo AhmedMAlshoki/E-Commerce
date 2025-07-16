@@ -370,36 +370,6 @@ User (Base)
 - **Report ↔ Customer**: Many-to-One (reporter)
 - **Report ↔ Product**: Many-to-One (reported product)
 
-### 📊 Entity Relationship Diagram (ERD)
-
-> **Note:** For a visual ERD diagram, you can:
-> 1. Use [dbdiagram.io](https://dbdiagram.io) to create a professional diagram
-> 2. Use [draw.io](https://draw.io) for a free diagram tool
-> 3. Use Mermaid syntax for GitHub-compatible diagrams
-> 
-> **Recommended:** Upload your ERD image to GitHub Issues and reference it here:
-> ```markdown
-> ![ERD Diagram](https://user-images.githubusercontent.com/your-image-url.png)
-> ```
-
-### 🔍 Database Features
-
-#### PostgreSQL Features
-- **Inheritance**: JOINED strategy for user hierarchy
-- **Entity Graphs**: Optimized query loading with `@NamedEntityGraph`
-- **Auditing**: Automatic `@CreatedDate`, `@CreatedBy` tracking
-- **Cascade Operations**: Proper relationship management
-
-#### MongoDB Features
-- **Document Storage**: Flexible schema for orders and reviews
-- **Auditing**: Automatic change tracking with `@EnableMongoAuditing`
-- **Indexing**: Optimized queries for document retrieval
-
-#### Redis Features
-- **Caching**: High-performance data access
-- **Session Storage**: User session management
-- **Cart Storage**: Fast shopping cart operations
-
 ---
 
 ## Project Structure
